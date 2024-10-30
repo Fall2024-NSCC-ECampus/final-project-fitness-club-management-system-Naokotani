@@ -5,11 +5,11 @@ import jakarta.persistence.*;
 @Entity
 @Table(name="users")
 public class User {
-    private static final String passwordRegex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)" +
-            "(?=.*[@#$%^&+=!]).{8,}$";
-    private static final String passwordMessage = "Password must be at least" +
-            " 8 characters and contain one upper case, one special character," +
-            " one lower case and one digit";
+//    private static final String passwordRegex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)" +
+//            "(?=.*[@#$%^&+=!]).{8,}$";
+//    private static final String passwordMessage = "Password must be at least" +
+//            " 8 characters and contain one upper case, one special character," +
+//            " one lower case and one digit";
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -26,25 +26,25 @@ public class User {
 
     public User() {}
 
-    public User(String username, String email, String password) {
-        this.username = username;
-        this.email = email;
-        this.password = password;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getUsername() {
-        return username;
-    }
+//    public User(String username, String email, String password) {
+//        this.username = username;
+//        this.email = email;
+//        this.password = password;
+//    }
+//
+//    public String getPassword() {
+//        return password;
+//    }
+//
+//    public void setPassword(String password) {
+//        this.password = password;
+//    }
+//
+//    public String getEmail() {
+//        return email;
+//    }
+//
+//    public String getUsername() {
+//        return username;
+//    }
 }
