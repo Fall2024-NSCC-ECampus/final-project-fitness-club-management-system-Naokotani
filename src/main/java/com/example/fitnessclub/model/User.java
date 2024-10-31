@@ -12,11 +12,14 @@ public class User {
 //            " one lower case and one digit";
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue
     private Long id;
 
-    @Column(name = "username", nullable = false, unique = true)
-    private String username;
+    @Column(name = "first_name", nullable = false)
+    private String firstName;
+
+    @Column(name = "last_name", nullable = false)
+    private String lastName;
 
     @Column(name="email", nullable = false, unique = true)
     private String email;
@@ -26,25 +29,42 @@ public class User {
 
     public User() {}
 
-//    public User(String username, String email, String password) {
-//        this.username = username;
-//        this.email = email;
-//        this.password = password;
-//    }
-//
-//    public String getPassword() {
-//        return password;
-//    }
-//
-//    public void setPassword(String password) {
-//        this.password = password;
-//    }
-//
-//    public String getEmail() {
-//        return email;
-//    }
-//
-//    public String getUsername() {
-//        return username;
-//    }
+    public User(String firstName, String lastName, String email, String password) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastname) {
+        this.lastName = lastname;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setFirstName(String firstname) {
+        this.firstName = firstname;
+    }
 }
