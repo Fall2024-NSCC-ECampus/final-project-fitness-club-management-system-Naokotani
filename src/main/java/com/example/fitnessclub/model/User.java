@@ -7,9 +7,11 @@ import jakarta.validation.constraints.Pattern;
 import java.util.HashSet;
 import java.util.Set;
 
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.NoArgsConstructor;
+import org.springframework.security.core.parameters.P;
 
 @Getter
 @Setter
@@ -42,6 +44,12 @@ public class User {
     @Column(name="email", nullable = false, unique = true)
     private String email;
 
+    @Size(min=8, message="Password must be at least 8 characters")
+    @Pattern(regexp="^(?=.*[A-Z]).+$", message="Must contain at least one upper case letter")
+    @Pattern(regexp="^(?=.*[a-z]).+$", message="Must contain at least one lower case letter")
+    @Pattern(regexp="^(?=.*[!@#$%^&]).+$", message="Must contain at least one special character !@#$%^&")
+    @Pattern(regexp="^(?=.*\\d).+$", message="Must contain at least one digit")
+    @Pattern(regexp = "^\\S+$", message="Must not include spaces")
     @Column(name="password", nullable = false)
     private String password;
 

@@ -21,7 +21,7 @@
         <div class="mb-3">
           <label for="firstName" class="form-label">First Name:</label>
           <input type="text" id="firstName" class="form-control" th:field="*{firstName}" required/>
-          <ul>
+          <ul class="red-text">
             <th:block th:each="error : ${#fields.errors('firstName')}">
               <li th:text="${error}"></li>
             </th:block>
@@ -30,7 +30,7 @@
         <div class="mb-3">
           <label for="lastName" class="form-label">Last Name:</label>
           <input type="text" id="lastName" class="form-control" th:field="*{lastName}" required/>
-          <ul>
+          <ul class="red-text">
             <th:block th:each="error : ${#fields.errors('lastName')}">
               <li th:text="${error}"></li>
             </th:block>
@@ -39,7 +39,7 @@
         <div class="mb-3">
             <label for="email" class="form-label">Email:</label>
             <input th:placeholder="email" type="text" id="email" class="form-control" th:field="*{email}" required/>
-          <ul>
+          <ul class="red-text">
             <th:block th:each="error : ${#fields.errors('email')}">
               <li th:text="${error}"></li>
             </th:block>
@@ -48,8 +48,8 @@
         </div>
         <div class="mb-3">
           <label for="password" class="form-label">Password:</label>
-          <input type="text" id="password" class="form-control" th:field="*{password}" required/>
-          <ul>
+          <input type="password" id="password" class="form-control" th:field="*{password}" required/>
+          <ul class="red-text">
             <th:block th:each="error : ${#fields.errors('password')}">
               <li th:text="${error}"></li>
             </th:block>
