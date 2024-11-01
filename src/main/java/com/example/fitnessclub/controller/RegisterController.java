@@ -6,39 +6,47 @@ import com.example.fitnessclub.exceptions.UserExists;
 import com.example.fitnessclub.model.User;
 import com.example.fitnessclub.model.UserRoles;
 import com.example.fitnessclub.repository.UserRepository;
+import jakarta.validation.ConstraintViolationException;
+import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-
-import java.util.HashSet;
-import java.util.Set;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Controller
 public class RegisterController {
     final
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
     final UserRegistrationService userRegistrationService = new UserRegistrationServiceImpl();
 
     public RegisterController(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
-    @PostMapping("/register/user")
-    public String register(@ModelAttribute User user, Model model) {
-        model.addAttribute("User", user);
+
+    @PostMapping("/register")
+    public String register(@Valid User user, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()) {
+            return "register";
+        }
         try {
             userRegistrationService.registerUser(userRepository, user, UserRoles.USER);
-            return "login";
+            return "welcome";
         } catch (UserExists e) {
-            model.addAttribute("UserExists", e);
             return "register";
         }
     }
 
-    @GetMapping("/register/user")
+    @GetMapping("/register")
     public String registrationForm(Model model) {
         model.addAttribute("user", new User());
         return "register";
