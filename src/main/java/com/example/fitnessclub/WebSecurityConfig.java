@@ -2,6 +2,7 @@ package com.example.fitnessclub;
 
 import com.example.fitnessclub.model.UserLogin;
 import com.example.fitnessclub.model.User;
+import com.example.fitnessclub.model.UserRoles;
 import com.example.fitnessclub.repository.UserRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,7 +27,9 @@ public class WebSecurityConfig implements UserDetailsService {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/", "/register").permitAll()
+                        .requestMatchers("/", "/register/user").permitAll()
+                        .requestMatchers("/register/trainer", "/register/admin")
+                        .hasRole(UserRoles.ADMIN.toString())
                         .anyRequest().authenticated()
                 )
                 .formLogin((form) -> form

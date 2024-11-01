@@ -1,7 +1,7 @@
 package com.example.fitnessclub.model;
 
-public enum Roles {
+public enum UserRoles {
     USER,
     ADMIN,
-    Trainer
+    TRAINER
 }

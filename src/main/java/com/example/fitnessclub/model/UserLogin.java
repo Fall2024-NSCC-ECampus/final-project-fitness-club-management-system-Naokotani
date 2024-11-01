@@ -17,7 +17,7 @@ public class UserLogin implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> list = new ArrayList<>();
-        list.add(new SimpleGrantedAuthority(Roles.USER.name()));
+        list.add(new SimpleGrantedAuthority(UserRoles.USER.name()));
         return list;
     }
 

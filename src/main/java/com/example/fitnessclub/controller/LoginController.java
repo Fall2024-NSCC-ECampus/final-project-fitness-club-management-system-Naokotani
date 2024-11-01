@@ -1,5 +1,6 @@
 package com.example.fitnessclub.controller;
 
+import com.example.fitnessclub.model.UserRoles;
 import com.example.fitnessclub.model.User;
 import com.example.fitnessclub.repository.UserRepository;
 import org.springframework.http.ResponseEntity;
@@ -20,21 +21,6 @@ public class LoginController {
         this.userRepository = userRepository;
     }
 
-    @PostMapping("/register")
-    public String register(@ModelAttribute User user, Model model) {
-        model.addAttribute("User", user);
-        PasswordEncoder passwordEncoder =
-                PasswordEncoderFactories.createDelegatingPasswordEncoder();
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userRepository.save(user);
-        return "welcome";
-    }
-
-    @GetMapping("/register")
-    public String registrationForm(Model model) {
-        model.addAttribute("user", new User());
-        return "register";
-    }
 
     @GetMapping("/users")
     @ResponseBody
