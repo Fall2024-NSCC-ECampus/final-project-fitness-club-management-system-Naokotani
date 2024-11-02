@@ -48,3 +48,6 @@
 1730563464211:help
 1730563469307:delete-admins 1
 1730563474781:list-admins
+1730585431766:register-admin
+1730585469132:register-admin -f Chris -l Hughes -e chris@chris-hughes.dev -p secret
+1730585475463:list-admins

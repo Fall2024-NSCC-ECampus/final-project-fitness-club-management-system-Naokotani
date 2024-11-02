@@ -1,6 +1,5 @@
 package com.example.fitnessclub;
 
-import com.example.fitnessclub.repository.UserRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
