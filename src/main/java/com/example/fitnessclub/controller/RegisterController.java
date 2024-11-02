@@ -6,14 +6,10 @@ import com.example.fitnessclub.exceptions.UserExists;
 import com.example.fitnessclub.model.User;
 import com.example.fitnessclub.model.UserRoles;
 import com.example.fitnessclub.repository.UserRepository;
-import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,7 +27,6 @@ public class RegisterController {
     public RegisterController(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
-
 
     @PostMapping("/register")
     public String register(@Valid User user, BindingResult bindingResult) {

@@ -8,8 +8,7 @@ import jakarta.persistence.*;
 public class Role {
 
     @Id
-    @ManyToOne
-    @JoinColumn(name="user_id")
+    @ManyToOne(fetch = FetchType.LAZY)
     private User userId;
 
     @Id

@@ -7,4 +7,8 @@ services:
       MYSQL_PASSWORD: secret
       MYSQL_ROOT_PASSWORD: verysecret
     ports:
-      - '3306:3306'  # Expose the port to the host
+      - '3306:3306'
+    volumes:
+      - fitness-club:/var/lib/mysql
+volumes:
+  fitness-club:

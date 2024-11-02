@@ -1,0 +1,50 @@
+1730553210527:admin-setup
+1730553242694:exit
+1730553508501:register-admin
+1730554640970:elp
+1730554642549:help
+1730554769938:list-admins
+1730554781449:register-admin
+1730554824728:register-admin --firstName Chris --lastName Hughes --email chris@chris.com --password secret
+1730555575057:register-admin --firstName Chris --lastName Hughes --password secret --email chris@chrishughes.com
+1730556338972:register-admin --firstName chris --lastName hughes --email chris@chris.com --password secret
+1730556381084:register-admin --firstName "ch is" --lastName hughes --email chris --pasword secret
+1730556410184:register-admin --firstName "ch is" --lastName hughes --email chris --password secret
+1730556419071:stacktrace
+1730556653101:register-admin -f chris -l hughes -e chris@chris.com -p secret
+1730557107169:help
+1730557423052:register-admin -f chris -l hughes -e chris@chris.com -p secret
+1730557426314:stacktrace
+1730557545760:register-admin -f chris -l hughes -e "chris@chris.com" -p secret
+1730557549468:stacktrace
+1730557628178:register-admin -f chris -l hughes -e chris@chris.com -p secret
+1730557723363:register-user -f chris -l hughes -e chris@chris.com -p secret
+1730557745963:register-admin -f chris -l hughes -e chris@chris.com -p secret
+1730557758508:stacktrace
+1730557797347:register-admin -f chris -l hughes -e test@test.com -p secret
+1730557831584:register-admin -f chris -l hughes -e testtwo@test.com -p secret
+1730558336358:help
+1730558349431:delete-users
+1730559085816:register-admin -f "ch is" -l hughes -e foo -p secret
+1730559184188:history
+1730559908425:register-admin -f chris -l hughes -e chris@chris-hughes.dev -p secret
+1730559915165:list-admins
+1730559921976:stacktrace
+1730560006959:list-admins
+1730560251295:stacktrace
+1730560310323:register-admin -f chris -l hughes -e chirs@chris-hughes.dev -p secret
+1730560315547:list-admins
+1730561226173:register-admin -f chris -l hughes -e chris@chris-hughes.dev -p secret
+1730561230503:list-admins
+1730561282767:stacktrace
+1730561385650:list-admins
+1730562485856:help
+1730562496165:delete-admins 1
+1730562916953:list-admins
+1730562939529:register-admin -f chris -l hughes -e chris@chris-hughes.dev -p secret
+1730563432377:list-admins
+1730563446653:register-admin -f chris -l hughes -e chris@chris.com -p secret
+1730563459968:list-admins
+1730563464211:help
+1730563469307:delete-admins 1
+1730563474781:list-admins

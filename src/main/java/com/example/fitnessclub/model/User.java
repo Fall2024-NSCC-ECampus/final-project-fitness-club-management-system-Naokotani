@@ -19,11 +19,6 @@ import org.springframework.security.core.parameters.P;
 @Entity
 @Table(name="users")
 public class User {
-//    private static final String passwordRegex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)" +
-//            "(?=.*[@#$%^&+=!]).{8,}$";
-//    private static final String passwordMessage = "Password must be at least" +
-//            " 8 characters and contain one upper case, one special character," +
-//            " one lower case and one digit";
 
     @Id
     @GeneratedValue
@@ -44,17 +39,16 @@ public class User {
     @Column(name="email", nullable = false, unique = true)
     private String email;
 
-    @Size(min=8, message="Password must be at least 8 characters")
-    @Pattern(regexp="^(?=.*[A-Z]).+$", message="Must contain at least one upper case letter")
-    @Pattern(regexp="^(?=.*[a-z]).+$", message="Must contain at least one lower case letter")
-    @Pattern(regexp="^(?=.*[!@#$%^&]).+$", message="Must contain at least one special character !@#$%^&")
-    @Pattern(regexp="^(?=.*\\d).+$", message="Must contain at least one digit")
+//    @Size(min=8, message="Password must be at least 8 characters")
+//    @Pattern(regexp="^(?=.*[A-Z]).+$", message="Must contain at least one upper case letter")
+//    @Pattern(regexp="^(?=.*[a-z]).+$", message="Must contain at least one lower case letter")
+//    @Pattern(regexp="^(?=.*[!@#$%^&]).+$", message="Must contain at least one special character !@#$%^&")
+//    @Pattern(regexp="^(?=.*\\d).+$", message="Must contain at least one digit")
     @Pattern(regexp = "^\\S+$", message="Must not include spaces")
     @Column(name="password", nullable = false)
     private String password;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name="user_id", referencedColumnName = "id")
+    @OneToMany(cascade = CascadeType.ALL)
     private Set<Role> roles = new HashSet<>();
 
     public User(String firstName, String lastName,
@@ -69,4 +63,13 @@ public class User {
         roles.add(new Role(this, role));
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "id: " + id +
+                ", firstName: " + firstName +
+                ", lastName: " + lastName +
+                ", email: " + email +
+                '}';
+    }
 }

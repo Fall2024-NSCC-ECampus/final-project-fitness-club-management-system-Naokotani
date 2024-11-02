@@ -4,7 +4,6 @@ import com.example.fitnessclub.exceptions.UserExists;
 import com.example.fitnessclub.model.User;
 import com.example.fitnessclub.model.UserRoles;
 import com.example.fitnessclub.repository.UserRepository;
-import jakarta.validation.ConstraintViolationException;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import java.util.Set;
