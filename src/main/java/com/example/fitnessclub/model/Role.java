@@ -1,6 +1,7 @@
 package com.example.fitnessclub.model;
 
 import jakarta.persistence.*;
+import lombok.Setter;
 
 @Entity
 @IdClass(RoleId.class)
@@ -11,6 +12,7 @@ public class Role {
     @ManyToOne(fetch = FetchType.LAZY)
     private User userId;
 
+    @Setter
     @Id
     @Column(name="role")
     @Enumerated(EnumType.STRING)
@@ -26,9 +28,5 @@ public class Role {
 
     public void setUser(User user) {
         this.userId = user;
-    }
-
-    public void setRole(UserRoles role) {
-        this.role = role;
     }
 }

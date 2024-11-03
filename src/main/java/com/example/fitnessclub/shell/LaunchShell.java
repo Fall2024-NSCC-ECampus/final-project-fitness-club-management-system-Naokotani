@@ -42,6 +42,7 @@ public class LaunchShell {
         return String.format("Deleted user with id %d", id);
     }
 
+
     @ShellMethod("Register new Admin" )
     public void registerAdmin(
             @ShellOption(value={"--first-name", "-f"})
@@ -61,18 +62,18 @@ public class LaunchShell {
             @ShellOption(value={"--email", "-e"})
             String email,
 
-            @ShellOption(value={"--trainer", "t"})
+            @ShellOption(value={"--trainer", "-t"})
             boolean trainer,
             @ShellOption(value={"--user", "-u"})
             boolean user
     ) {
         User adminUser = new User(firstName, lastName, email, password);
-        Set<UserRoles> userRoles = new HashSet<>();
-        userRoles.add(UserRoles.ADMIN);
-        if(trainer) {userRoles.add(UserRoles.TRAINER);}
-        if(user) {userRoles.add(UserRoles.MEMBER);}
+        adminUser.addRole(UserRoles.ADMIN);
+        if(trainer) {adminUser.addRole(UserRoles.TRAINER);}
+        if(user) {adminUser.addRole(UserRoles.MEMBER);}
+
         try {
-            userRegistrationService.registerUser(userRepository, adminUser, userRoles);
+            userRegistrationService.registerUser(userRepository, adminUser);
             System.out.printf("First Name: %s, Last Name: %s, Email: %s has been registered successfully%n"
                     , firstName, lastName, email);
         } catch (UserExists e) {

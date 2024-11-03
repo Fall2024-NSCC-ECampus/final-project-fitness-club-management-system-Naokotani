@@ -51,3 +51,23 @@
 1730585431766:register-admin
 1730585469132:register-admin -f Chris -l Hughes -e chris@chris-hughes.dev -p secret
 1730585475463:list-admins
+1730670777289:register-admin -f Chris -l Hughes -e chris@chris-hughes.dev -p secret -u -t
+1730670833368:register-admin -f Chris -l Hughes -e chris@chris-hguhes.dev -p secret -u -t
+1730670902610:help
+1730670912691:delete-user 52
+1730670944490:register-admin -f Chris -l Hughes -e chris@chris-hughes.dev -p secret
+1730673532677:help
+1730673540405:delete-user 53
+1730673570801:register-admin -f Chris -l Hughes -e chris@chris-hughes.dev -p -u -t
+1730673601002:register-admin -f Chris -l Hughes -e chris@chris-hughes.dev -p secret -u -t
+1730673606787:stacktrace
+1730673725178:register-user -f Chris -l Hughes -e chris@chris-hughes.dev -p secret -u -t
+1730673752263:register-admin -f Chris -l Hughes -e chris@chris-hughes.dev -p secret -u -t
+1730673756395:stacktrace
+1730673943369:register-admin -f Chris -l Hughes -e chris@chris-hughes.dev -p secret -u -t
+1730673991172:stacktrace
+1730674464841:register-admin -f Chris -l Hughes -e chris@chris-hughes.dev -p secret -u -t
+1730674482357:stacktrace
+1730674574506:register-admin -f Chris -l Hughes -e chris@chris-hughes.dev -p secret -u -t
+1730674740544:stacktrace
+1730676479888:register-admin -f Chris -l Hughes -e chris@chris-hughes.dev -p secret -u -t

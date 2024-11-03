@@ -6,25 +6,15 @@ import com.example.fitnessclub.model.User;
 import com.example.fitnessclub.model.UserRequest;
 import com.example.fitnessclub.model.UserRoles;
 import com.example.fitnessclub.repository.UserRepository;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
-import org.springframework.security.crypto.password.PasswordEncoder;
-
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 public class UserRegistrationServiceImpl implements UserRegistrationService {
-    private final static PasswordEncoder passwordEncoder =
-                PasswordEncoderFactories.createDelegatingPasswordEncoder();
 
     @Override
-    public void registerUser(UserRepository userRepository,
-                             User user, Set<UserRoles> roles) throws UserExists {
+    public void registerUser(UserRepository userRepository, User user) throws UserExists {
         if(userExists(userRepository, user)) {
             throw new UserExists();
         } else {
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
-            userRepository.save(user);
+            saveUser(userRepository, user);
         }
     }
 
@@ -42,8 +32,7 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
         } else if(userRequest.getRoles().isEmpty()) {
             throw new EmptyRoleSet();
         } else {
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
-            userRepository.save(user);
+            saveUser(userRepository, user);
         }
     }
 
@@ -59,7 +48,6 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
     }
 
     private void saveUser(UserRepository userRepository, User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
     }
 
