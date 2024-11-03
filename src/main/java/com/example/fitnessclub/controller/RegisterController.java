@@ -2,11 +2,14 @@ package com.example.fitnessclub.controller;
 
 import com.example.fitnessclub.Service.UserRegistrationService;
 import com.example.fitnessclub.Service.UserRegistrationServiceImpl;
+import com.example.fitnessclub.exceptions.EmptyRoleSet;
 import com.example.fitnessclub.exceptions.UserExists;
 import com.example.fitnessclub.model.User;
+import com.example.fitnessclub.model.UserRequest;
 import com.example.fitnessclub.model.UserRoles;
 import com.example.fitnessclub.repository.UserRepository;
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -23,30 +27,34 @@ import java.util.List;
 public class RegisterController {
     final
     private UserRepository userRepository;
-
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
     final UserRegistrationService userRegistrationService = new UserRegistrationServiceImpl();
-
     public RegisterController(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
     @PostMapping("/register")
-    public String register(@Valid User user, BindingResult bindingResult, @RequestParam List<String> roles) {
+    public String register(@Valid UserRequest userRequest, BindingResult bindingResult, Model model) {
         if(bindingResult.hasErrors()) {
             return "register";
         }
         try {
-            userRegistrationService.registerUser(userRepository, user, roles);
+            userRegistrationService.registerUser(userRepository, userRequest);
             return "welcome";
+        } catch (EmptyRoleSet e) {
+            model.addAttribute("user", userRequest);
+            model.addAttribute("emptyRoleSet", e.getMessage());
+            return "register";
         } catch (UserExists e) {
+            model.addAttribute("userExists", e.getMessage());
+            model.addAttribute("user", userRequest);
             return "register";
         }
+
     }
 
     @GetMapping("/register")
     public String registrationForm(Model model) {
-        model.addAttribute("user", new User());
+        model.addAttribute("user", new UserRequest());
         return "register";
     }
 

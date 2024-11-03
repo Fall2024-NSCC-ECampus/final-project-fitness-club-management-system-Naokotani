@@ -1,5 +1,6 @@
 package com.example.fitnessclub.model;
 
+import com.example.fitnessclub.exceptions.UserExists;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -8,6 +9,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.NoArgsConstructor;
@@ -16,6 +18,7 @@ import org.springframework.security.core.parameters.P;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name="users")
 public class User {
@@ -50,6 +53,14 @@ public class User {
 
     @OneToMany(cascade = CascadeType.ALL)
     private Set<Role> roles = new HashSet<>();
+
+    public User(String firstName, String lastName, String email, String password, Set<String> userRoles) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        userRoles.stream().map(UserRoles::valueOf).forEach(this::addRole);
+    }
 
     public User(String firstName, String lastName,
                 String email, String password) {
