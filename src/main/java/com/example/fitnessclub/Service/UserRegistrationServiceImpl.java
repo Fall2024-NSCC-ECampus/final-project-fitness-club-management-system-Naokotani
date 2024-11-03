@@ -6,6 +6,9 @@ import com.example.fitnessclub.model.UserRoles;
 import com.example.fitnessclub.repository.UserRepository;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
+
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class UserRegistrationServiceImpl implements UserRegistrationService {
@@ -33,6 +36,18 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
         } else {
             saveUser(userRepository, user);
         }
+    }
+
+    @Override
+    public void registerUser(UserRepository userRepository,
+                             User user, List<String> roles) throws UserExists {
+        registerUser(userRepository, user, roleStringListToEnumSet(roles));
+    }
+
+    private Set<UserRoles> roleStringListToEnumSet(List<String> roles) throws UserExists {
+        Set<UserRoles> userRoles = new HashSet<>();
+        roles.forEach(role -> userRoles.add(UserRoles.valueOf(role)));
+        return userRoles;
     }
 
     private void saveUser(UserRepository userRepository, User user) {

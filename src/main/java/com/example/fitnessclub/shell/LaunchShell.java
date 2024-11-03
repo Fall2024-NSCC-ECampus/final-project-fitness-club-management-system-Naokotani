@@ -70,7 +70,7 @@ public class LaunchShell {
         Set<UserRoles> userRoles = new HashSet<>();
         userRoles.add(UserRoles.ADMIN);
         if(trainer) {userRoles.add(UserRoles.TRAINER);}
-        if(user) {userRoles.add(UserRoles.USER);}
+        if(user) {userRoles.add(UserRoles.MEMBER);}
         try {
             userRegistrationService.registerUser(userRepository, adminUser, userRoles);
             System.out.printf("First Name: %s, Last Name: %s, Email: %s has been registered successfully%n"

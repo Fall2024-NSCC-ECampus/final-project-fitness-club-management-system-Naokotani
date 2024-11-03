@@ -4,9 +4,11 @@ import com.example.fitnessclub.model.User;
 import com.example.fitnessclub.model.UserRoles;
 import com.example.fitnessclub.repository.UserRepository;
 
+import java.util.List;
 import java.util.Set;
 
 public interface UserRegistrationService {
     void registerUser(UserRepository userRepository, User user, Set<UserRoles> roles);
     void registerUser(UserRepository userRepository, User user, UserRoles role);
+    void registerUser(UserRepository userRepository, User user, List<String> roles);
 }

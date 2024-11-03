@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 @Controller
 public class RegisterController {
@@ -29,12 +32,12 @@ public class RegisterController {
     }
 
     @PostMapping("/register")
-    public String register(@Valid User user, BindingResult bindingResult) {
+    public String register(@Valid User user, BindingResult bindingResult, @RequestParam List<String> roles) {
         if(bindingResult.hasErrors()) {
             return "register";
         }
         try {
-            userRegistrationService.registerUser(userRepository, user, UserRoles.USER);
+            userRegistrationService.registerUser(userRepository, user, roles);
             return "welcome";
         } catch (UserExists e) {
             return "register";
