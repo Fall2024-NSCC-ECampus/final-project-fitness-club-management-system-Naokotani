@@ -1,8 +1,5 @@
-package com.example.fitnessclub;
+package com.example.fitnessclub.security;
 
-import com.example.fitnessclub.model.UserLogin;
-import com.example.fitnessclub.model.User;
-import com.example.fitnessclub.model.UserRoles;
 import com.example.fitnessclub.repository.UserRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.SecurityFilterChain;
+
 
 @Configuration
 @EnableWebSecurity
@@ -27,9 +25,9 @@ public class WebSecurityConfig implements UserDetailsService {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/", "/register", "/error").permitAll()
-                        .requestMatchers("/register/trainer", "/register/admin")
-                        .hasRole(UserRoles.ADMIN.toString())
+                        .requestMatchers("/", "/register", "/error", "/admin/**").permitAll()
+//                        .requestMatchers("/admin/**", "/admin/*")
+//                        .hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .formLogin((form) -> form
@@ -43,12 +41,13 @@ public class WebSecurityConfig implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByEmail(username);
-        if (user == null) {
-            throw new UsernameNotFoundException(username);
-        }
-        return new UserLogin(user);
+    public UserDetails loadUserByUsername(String username)
+            throws UsernameNotFoundException {
+        return new UserLogin(userRepository
+                .findByEmail(username)
+                .orElseThrow(()->
+                        new UsernameNotFoundException(username)),
+                userRepository);
     }
 }
 

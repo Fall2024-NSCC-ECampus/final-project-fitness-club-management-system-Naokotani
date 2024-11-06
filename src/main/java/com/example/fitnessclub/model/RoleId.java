@@ -7,7 +7,6 @@ public class RoleId implements Serializable {
     private Long userId;
     private UserRoles role;
 
-    // Default constructor, equals, and hashCode
     public RoleId() {}
 
     public RoleId(Long userId, UserRoles role) {

@@ -1,16 +1,12 @@
 package com.example.fitnessclub.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.Set;
 
 @Entity
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class ClassDetails {
@@ -23,4 +19,9 @@ public class ClassDetails {
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<ClassDate> dates;
+
+    public ClassDetails(String name, Set<ClassDate> dates) {
+        this.name = name;
+        this.dates = dates;
+    }
 }

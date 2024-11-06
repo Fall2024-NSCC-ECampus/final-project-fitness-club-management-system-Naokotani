@@ -23,7 +23,7 @@ public class LaunchShell {
 
     public LaunchShell(UserRepository userRepository) {
         this.userRepository = userRepository;
-        this.userRegistrationService = new UserRegistrationServiceImpl();
+        this.userRegistrationService = new UserRegistrationServiceImpl(userRepository);
     }
 
     @ShellMethod("List registered admins")
@@ -73,7 +73,7 @@ public class LaunchShell {
         if(user) {adminUser.addRole(UserRoles.MEMBER);}
 
         try {
-            userRegistrationService.registerUser(userRepository, adminUser);
+            userRegistrationService.registerUser(adminUser);
             System.out.printf("First Name: %s, Last Name: %s, Email: %s has been registered successfully%n"
                     , firstName, lastName, email);
         } catch (UserExists e) {
