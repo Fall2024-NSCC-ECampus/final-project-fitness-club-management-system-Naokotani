@@ -21,10 +21,30 @@
     <td th:text="${user.email}" class="text-left"></td>
     <td th:text="${user.id}" class="text-left"></td>
     <td>
-      <a th:href="@{/admin/user/update/{id}(id=${user.id})}" class="btn btn-primary">Update</a>
+      <form th:action="@{/admin/user/update/{id}(id=${user.id})}" method="post">
+        <button type="submit" class="btn btn-primary mb-3">Update</button>
+      </form>
+    </td>
+    <td>
+      <form th:action="@{/admin/user/delete/{id}(id=${user.id})}" method="post">
+        <button type="submit" class="btn btn-primary mb-3">Delete</button>
+      </form>
     </td>
   </tr>
   </tbody>
 </table>
 </body>
+<script>
+  function submitForm() {
+    const url = document.querySelector('a').href;
+    const id = document.querySelector('a').getAttribute('data-id');
+    fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: `id=${id}`
+    })
+            .then(response => response.text())
+            .then(result => console.log(`javascript ${result}`));
+  }
+</script>
 </html>

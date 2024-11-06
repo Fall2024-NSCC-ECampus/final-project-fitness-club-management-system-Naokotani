@@ -80,4 +80,12 @@ public class UserController {
         model.addAttribute("user", new UserRequest());
         return "register";
     }
+
+    @PostMapping("/admin/user/delete/{id}")
+    public String deleteUser(@PathVariable Long id) {
+        userService.deleteUser(id);
+        return "redirect:/admin/users";
+    }
+
 }
+

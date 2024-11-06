@@ -9,6 +9,7 @@ import java.util.List;
 public interface UserService {
     void deleteMemeber(long id);
     void deleteTrainer(long id);
+    void deleteUser(long id);
     void updateMember(UserRequest user, long id);
     void updateTrainer(UserRequest user, long id);
     List<User> findUsers();

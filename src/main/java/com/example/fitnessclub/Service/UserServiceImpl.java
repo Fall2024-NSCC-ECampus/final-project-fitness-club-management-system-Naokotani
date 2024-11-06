@@ -8,6 +8,7 @@ import com.example.fitnessclub.request.UserRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -48,6 +49,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteTrainer(long id) {
        userRepository.deleteById(id);
+    }
+
+    @Override
+    public void deleteUser(long id) throws UserNotFound {
+        userRepository.findById(id).orElseThrow(() -> new UserNotFound(id));
+        userRepository.deleteById(id);
     }
 
     @Override
