@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form th:action="@{/admin/class/date/create/{id}(id=${class.id})}" method="post" th:object="${classDateRequest}">
+  <div>
+    <label for="date">Date:</label>
+    <input type="date" id="date" th:field="*{date}" required="required" />
+  </div>
+
+  <div>
+    <label for="startTime">Start Time:</label>
+    <input type="time" id="startTime" th:field="*{startTime}" required="required" />
+  </div>
+
+  <div>
+    <label for="endTime">End Time:</label>
+    <input type="time" id="endTime" th:field="*{endTime}" required="required" />
+  </div>
+
+  <div>
+    <button type="submit">Save</button>
+  </div>
+</form>
+
+</body>
+</html>

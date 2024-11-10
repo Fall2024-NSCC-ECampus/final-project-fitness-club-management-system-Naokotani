@@ -1,19 +1,25 @@
 package com.example.fitnessclub.Service;
 
 import com.example.fitnessclub.exceptions.ClassDetailsNotFound;
+import com.example.fitnessclub.model.ClassDate;
 import com.example.fitnessclub.model.ClassDetails;
+import com.example.fitnessclub.repository.ClassDateRepository;
 import com.example.fitnessclub.repository.ClassRepository;
+import com.example.fitnessclub.request.ClassDateRequest;
 import com.example.fitnessclub.request.ClassRequest;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
 public class ClassServiceImpl implements ClassService {
     private final ClassRepository classRepository;
+    private final ClassDateRepository classDateRepository;
 
-    public ClassServiceImpl(ClassRepository classRepository) {
+    public ClassServiceImpl(ClassRepository classRepository, ClassDateRepository classDateRepository) {
         this.classRepository = classRepository;
+        this.classDateRepository = classDateRepository;
     }
 
     @Override
@@ -47,7 +53,34 @@ public class ClassServiceImpl implements ClassService {
     }
 
     @Override
-    public ClassDetails findClassDetails(long id) throws ClassDetailsNotFound {
+    public ClassDetails findClassDetails(Long id) throws ClassDetailsNotFound {
         return classRepository.findById(id).orElseThrow(() ->new ClassDetailsNotFound(id));
+    }
+
+    @Override
+    public List<ClassDate> findClassDates(Long classId) {
+        return classDateRepository.findDateByClassId(classId);
+    }
+
+    //TODO handle error better
+    @Override
+    public ClassDate findClassDateById(Long id) {
+        return classDateRepository.findById(id).orElseThrow();
+    }
+
+    @Override
+    public ClassDetails findClassDetailsByDateId(Long id) {
+        return classDateRepository.findClassDetailsByDateId(id);
+    }
+
+    //TODO handle error better
+    @Override
+    public void createClassDate(ClassDateRequest classDate, Long id) {
+        classDateRepository.save(new ClassDate(
+                classRepository.findById(id).orElseThrow(),
+                classDate.getDate(),
+                classDate.getStartTime(),
+                classDate.getEndTime()
+        ));
     }
 }

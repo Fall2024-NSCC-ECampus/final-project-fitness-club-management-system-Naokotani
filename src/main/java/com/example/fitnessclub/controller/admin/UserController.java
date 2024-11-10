@@ -1,8 +1,6 @@
 package com.example.fitnessclub.controller.admin;
 
-import com.example.fitnessclub.Service.UserRegistrationServiceImpl;
-import com.example.fitnessclub.Service.UserService;
-import com.example.fitnessclub.Service.UserServiceImpl;
+import com.example.fitnessclub.Service.*;
 import com.example.fitnessclub.exceptions.EmptyRoleSet;
 import com.example.fitnessclub.exceptions.UserExists;
 import com.example.fitnessclub.model.User;
@@ -27,10 +25,15 @@ import java.util.List;
 public class UserController {
     private final UserService userService;
     private final UserRegistrationServiceImpl userRegistrationService;
+    private final ClassService classService;
 
-    public UserController(UserServiceImpl userService, UserRegistrationServiceImpl userRegistrationService) {
+    public UserController(UserServiceImpl userService,
+                          UserRegistrationServiceImpl userRegistrationService,
+                          ClassServiceImpl classServiceImpl
+    ) {
         this.userService = userService;
         this.userRegistrationService = userRegistrationService;
+        this.classService = classServiceImpl;
     }
 
     /*
@@ -99,6 +102,7 @@ public class UserController {
      */
     @GetMapping("/admin/trainers")
     public String listTrainers(Model model) {
+        model.addAttribute("classes", classService.findAll());
         model.addAttribute("users", userService.findTrainers());
         return "trainers";
     }

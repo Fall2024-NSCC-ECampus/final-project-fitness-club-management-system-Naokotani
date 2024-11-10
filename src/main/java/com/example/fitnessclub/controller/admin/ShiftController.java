@@ -1,20 +1,13 @@
 package com.example.fitnessclub.controller.admin;
 
+import com.example.fitnessclub.Service.ClassService;
+import com.example.fitnessclub.Service.ClassServiceImpl;
 import com.example.fitnessclub.Service.ShiftService;
-import com.example.fitnessclub.exceptions.ClassDetailsNotFound;
-import com.example.fitnessclub.exceptions.TrainerNotFound;
 import com.example.fitnessclub.model.Shift;
-import com.example.fitnessclub.request.ShiftRequest;
-import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,9 +16,11 @@ import java.util.List;
 @Controller
 public class ShiftController {
     private final ShiftService shiftService;
+    private final ClassService classService;
 
-    public ShiftController(ShiftService shiftService) {
+    public ShiftController(ShiftService shiftService, ClassServiceImpl classServiceImpl) {
         this.shiftService = shiftService;
+        this.classService = classServiceImpl;
     }
 
     /*
@@ -34,33 +29,13 @@ public class ShiftController {
 
     /**
      * Creates a new shift
-     * @param shiftRequest http request for a new shift.
-     * @param id of trainer to add to the shift.
-     * @param bindingResult the result of validation from binding to the class.
-     * @param model the view model.
      * @return welcome.html or shiftForm.html on error.
      */
-    @PostMapping("/admin/shift/create/{id}")
-    public String createShift(@Valid ShiftRequest shiftRequest, @PathVariable Long id,
-                              BindingResult bindingResult, Model model) {
-        model.addAttribute("shift",
-                shiftRequest);
-        if(bindingResult.hasErrors()) {
-            return "shiftForm";
-        }
-        try {
-            shiftService.createShift(shiftRequest, id);
-        } catch (TrainerNotFound e) {
-            model.addAttribute(
-                    "trainerNotFound",
-                    e.getMessage());
-            return "shiftForm";
-        } catch (ClassDetailsNotFound e) {
-            model.addAttribute(
-                    "classDetailsNotFound",
-                    e.getMessage());
-            return "shiftForm";
-        }
+    @PostMapping("/admin/shift/create/")
+    public String createShift(@RequestParam("trainerId") Long trainerId,
+                              @RequestParam("classId") Long classId,
+                              @RequestParam("dateId") Long dateId) {
+        shiftService.createShift(trainerId, classId, dateId);
         return "welcome";
     }
 
@@ -69,11 +44,10 @@ public class ShiftController {
      * @param model The view model.
      * @return shiftForm.html.
      */
-    @GetMapping("/admin/shift/create/{id}")
-    public String createShiftForm(@PathVariable Long id, Model model) {
-        model.addAttribute("classes", shiftService.getClasses());
+    @PostMapping("/admin/shift/form/{id}")
+    public String createShiftForm(@PathVariable Long id, @RequestParam Long classId, Model model) {
+        model.addAttribute("dates", classService.findClassDates(classId));
         model.addAttribute("trainer", id);
-        model.addAttribute("shiftRequest", new ShiftRequest());
         return "shiftForm";
     }
 
@@ -86,9 +60,9 @@ public class ShiftController {
      * @param model view model
      * @return shifts.html
      */
-    @GetMapping("/admin/shifts")
-    public String listShifts(Model model) {
-        model.addAttribute("shifts", shiftService.findAll());
+    @GetMapping("/admin/shifts/trainer/{id}")
+    public String listShifts(@PathVariable Long id, Model model) {
+        model.addAttribute("shifts", shiftService.findShiftsByTrainerId(id));
         return "shifts";
     }
 
@@ -104,13 +78,13 @@ public class ShiftController {
         return "shifts";
     }
 
-    //TODO Update methods
+
 
     /*
      * Destroy
      */
 
-    @DeleteMapping("/admin/shift/delete/{id}")
+    @PostMapping("/admin/shift/delete/{id}")
     public String deleteShift(@PathVariable Long id) {
         shiftService.deleteShift(id);
         return "redirect:/admin/shifts";

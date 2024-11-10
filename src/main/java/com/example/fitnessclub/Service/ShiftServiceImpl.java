@@ -6,7 +6,6 @@ import com.example.fitnessclub.exceptions.TrainerNotFound;
 import com.example.fitnessclub.model.ClassDetails;
 import com.example.fitnessclub.model.Shift;
 import com.example.fitnessclub.repository.ShiftRepository;
-import com.example.fitnessclub.request.ShiftRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -46,14 +45,12 @@ public class ShiftServiceImpl implements ShiftService {
     }
 
     @Override
-    public void createShift(ShiftRequest shiftRequest, Long trainerId)
+    public void createShift(Long trainerId, Long classDateId, Long dateId)
             throws ClassDetailsNotFound, TrainerNotFound {
         Shift shift = new Shift(
-                classService.findClassDetails(shiftRequest.getClassId()),
+                classService.findClassDetailsByDateId(classDateId),
                 userService.findUserById(trainerId),
-                shiftRequest.parseDate(),
-                shiftRequest.parseStartTime(),
-                shiftRequest.parseEndTime()
+                classService.findClassDateById(dateId)
         );
         shiftRepository.save(shift);
     }
@@ -64,16 +61,22 @@ public class ShiftServiceImpl implements ShiftService {
     }
 
     @Override
-    public void updateShift(Shift newShift, long id) throws ShiftNotFound {
-        Shift oldShift = findShift(id);
-        shiftRepository.save(setShift(oldShift, newShift));
+    public List<Shift> findShiftsByTrainerId(Long trainerId) {
+        return shiftRepository.findByTrainerId(trainerId);
     }
 
-    private Shift setShift(Shift oldShift, Shift newShift) {
-        oldShift.setDate(newShift.getDate());
-        oldShift.setStartTime(newShift.getStartTime());
-        oldShift.setEndTime(newShift.getEndTime());
-        oldShift.setTrainer(newShift.getTrainer());
-        return oldShift;
+    // TODO fix this!
+    @Override
+    public void updateShift(Shift newShift, long id) throws ShiftNotFound {
+//        Shift oldShift = findShift(id);
+//        shiftRepository.save(setShift(oldShift, newShift));
     }
+
+//    private Shift setShift(Shift oldShift, Shift newShift) {
+//        oldShift.setDate(newShift.getDate());
+//        oldShift.setStartTime(newShift.getStartTime());
+//        oldShift.setEndTime(newShift.getEndTime());
+//        oldShift.setTrainer(newShift.getTrainer());
+//        return oldShift;
+//    }
 }

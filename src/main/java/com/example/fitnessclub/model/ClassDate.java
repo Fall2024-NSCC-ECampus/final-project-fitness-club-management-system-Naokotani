@@ -1,6 +1,7 @@
 package com.example.fitnessclub.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -9,7 +10,7 @@ import java.time.LocalTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Entity(name="class_date")
+@Entity
 public class ClassDate {
     @Id
     @GeneratedValue
@@ -18,12 +19,20 @@ public class ClassDate {
     @ManyToOne(fetch = FetchType.LAZY)
     private ClassDetails classDetails;
 
-    @Column(nullable = false)
+    @NotNull
     private LocalDate date;
 
-    @Column(nullable = false)
-    LocalTime time;
+    @NotNull
+    private LocalTime startTime;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private User trainer;
+    @NotNull
+    private LocalTime endTime;
+
+    public ClassDate(ClassDetails classDetails, LocalDate date,
+                     LocalTime startTime, LocalTime endTime) {
+        this.classDetails = classDetails;
+        this.date = date;
+        this.startTime = startTime;
+        this.endTime = endTime;
+    }
 }

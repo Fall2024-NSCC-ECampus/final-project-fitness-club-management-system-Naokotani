@@ -13,50 +13,26 @@
 </head>
 <body>
 <div class="container">
-  <form action="#" th:action="@{/admin/shift/create/{id}(id=${id})}" th:object="${shiftRequest}" method="post">
-    <div class="row justify-content-center">
-      <div class="col-md-6">
-        <h2 class="text-center">Shift Request</h2>
-        <div class="mb-3">
-          <label for="class">Select Class:</label>
-          <select id="class" name="classId">
-            <option value="" disabled selected>Select a class</option>
-            <th:block th:each="class : ${classes}">
-              <option th:value="${class.id}" th:text="${class.name}"></option>
-            </th:block>
-          </select>
-          <ul class="red-text">
-            <th:block th:each="error : ${#fields.errors('classId')}">
-              <li class="text-danger" th:text="${error}"></li>
-            </th:block>
-            <li th:if="${classDetailsNotFound}" class="text-danger" th:text="${classDetailsNotFound}"></li>
-          </ul>
-        </div>
-        <div class="mb-3">
-          <label for="dateString" class="form-label">Date (YYYY-MM-DD):</label>
-          <input type="text" id="dateString" class="form-control" th:field="*{dateString}" required />
-          <ul class="red-text">
-            <th:block th:each="error : ${#fields.errors('dateString')}">
-              <li class="text-danger" th:text="${error}"></li>
-            </th:block>
-          </ul>
-        </div>
-        <div class="mb-3">
-          <label for="startTimeString" class="form-label">Start Time (HH:MM):</label>
-          <input type="text" id="startTimeString" class="form-control" th:field="*{startTimeString}" required />
-          <ul class="red-text">
-            <th:block th:each="error : ${#fields.errors('startTimeString')}">
-              <li class="text-danger" th:text="${error}"></li>
-            </th:block>
-          </ul>
-        </div>
-        <div class="mb-3">
-          <label for="endTimeString" class="form-label">End Time (HH:MM):</label>
-          <input type="text" id="endTimeString" class="form-control" th:field="*{endTimeString}" required />
-        </div>
-        <button type="submit" class="btn btn-primary w-100" id="submit-registration-form">Submit</button>
-      </div>
-    </div>
-  </form>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>Date</th>
+      <th>Start</th>
+      <th>End</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="date : ${dates}">
+      <td th:text="${date.getDate()}" class="text-left"></td>
+      <td th:text="${date.getStartTime()}" class="text-left"></td>
+      <td th:text="${date.getEndTime()}" class="text-left"></td>
+      <td>
+          <form th:action="@{/admin/shift/create/(trainerId=${id}, classId=${date.getClassDetails().id}, dateId=${date.id})}" method="post">
+          <button type="submit" class="btn btn-primary mb-3">Create Shift</button>
+        </form>
+      </td>
+    </tr>
+    </tbody>
+  </table>
 </div>
 </body>

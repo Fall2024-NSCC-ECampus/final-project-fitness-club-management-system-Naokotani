@@ -31,14 +31,21 @@
       </form>
     </td>
     <td>
-      <button>
-        <a class="btn btn-primary mb-3" th:href="@{/admin/shifts/{id}(id=${user.id})}">View Shifts</a>
-      </button>
+      <form th:action="@{/admin/shift/form/{id}(id=${user.id})}" method="post">
+        <label for="class">Select Class:</label>
+        <select id="class" name="classId" required>
+          <option value="" disabled selected>Select a class</option>
+          <th:block th:each="class : ${classes}">
+            <option th:value="${class.id}" th:text="${class.name}"></option>
+          </th:block>
+        </select>
+        <button type="submit" class="btn btn-primary mb-3">Add Shift</button>
+      </form>
     </td>
     <td>
-      <button>
-        <a class="btn btn-primary mb-3" th:href="@{/admin/shift/create/{id}(id=${user.id})}">Add Shift</a>
-      </button>
+      <form th:action="@{/admin/shifts/trainer/{id}(id=${user.id})}" method="get">
+        <button type="submit" class="btn btn-primary mb-3">View Shifts</button>
+      </form>
     </td>
   </tr>
   </tbody>

@@ -3,13 +3,16 @@ package com.example.fitnessclub.controller.admin;
 import com.example.fitnessclub.Service.ClassService;
 import com.example.fitnessclub.exceptions.ClassDetailsNotFound;
 import com.example.fitnessclub.exceptions.TrainerNotFound;
+import com.example.fitnessclub.model.ClassDate;
 import com.example.fitnessclub.model.ClassDetails;
+import com.example.fitnessclub.request.ClassDateRequest;
 import com.example.fitnessclub.request.ClassRequest;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 /**
@@ -64,7 +67,27 @@ public class ClassController {
         return "classForm";
     }
 
-    //TODO Read methods
+    @GetMapping("/admin/class/date/create/{id}")
+    public String createClassDateForm(@PathVariable Long id, Model model) {
+        model.addAttribute("classDateRequest", new ClassDateRequest());
+        model.addAttribute("class", classService.findClassDetails(id));
+        return "classDateForm";
+    }
+
+    //TODO validation
+    @PostMapping("/admin/class/date/create/{id}")
+    public String createClassDate(@Valid ClassDateRequest classDate, @PathVariable Long id, Model model) {
+        classService.createClassDate(classDate, id);
+        return "welcome";
+    }
+
+    //TODO what is this?
+    @GetMapping("/admin/classes")
+    public String listClasses(Model model) {
+        model.addAttribute("classes", classService.findAll());
+        return "classList";
+    }
+
     //TODO Update methods
     //TODO Destroy methods
 }

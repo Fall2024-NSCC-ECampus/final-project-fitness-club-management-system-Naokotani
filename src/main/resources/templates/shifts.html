@@ -18,11 +18,11 @@
   </thead>
   <tbody>
   <tr th:each="shift : ${shifts}">
-    <td th:text="${shift.getClassDetails().name}" class="text-left"></td>
+    <td th:text="${shift.getClassDetails().getName()}" class="text-left"></td>
     <td th:text="${shift.getTrainer().getName()}" class="text-left"></td>
-    <td th:text="${shift.getDate()}" class="text-left"></td>
-    <td th:text="${shift.getStartTime()}" class="text-left"></td>
-    <td th:text="${shift.getEndTime()}" class="text-left"></td>
+    <td th:text="${shift.getClassDate().getDate()}" class="text-left"></td>
+    <td th:text="${shift.getClassDate().getStartTime()}" class="text-left"></td>
+    <td th:text="${shift.getClassDate().getEndTime()}" class="text-left"></td>
     <td>
       <form th:action="@{/admin/shift/update/{id}(id=${shift.id})}" method="post">
         <button type="submit" class="btn btn-primary mb-3">Update</button>
