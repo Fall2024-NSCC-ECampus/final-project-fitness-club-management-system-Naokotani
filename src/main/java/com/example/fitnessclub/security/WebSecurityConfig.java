@@ -25,7 +25,7 @@ public class WebSecurityConfig implements UserDetailsService {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/", "/register", "/error", "/admin/**").permitAll()
+                        .requestMatchers("/", "/register", "/error", "/admin/**", "/trainer/**").permitAll()
 //                        .requestMatchers("/admin/**", "/admin/*")
 //                        .hasRole("ADMIN")
                         .anyRequest().authenticated()

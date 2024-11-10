@@ -9,7 +9,6 @@ import com.example.fitnessclub.request.ClassDateRequest;
 import com.example.fitnessclub.request.ClassRequest;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Service

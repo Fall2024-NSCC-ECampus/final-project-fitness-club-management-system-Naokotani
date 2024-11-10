@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * CRUD controller for shits
+ * CRUD controller for shifts
  */
 @Controller
 public class ShiftController {
@@ -78,12 +78,9 @@ public class ShiftController {
         return "shifts";
     }
 
-
-
     /*
      * Destroy
      */
-
     @PostMapping("/admin/shift/delete/{id}")
     public String deleteShift(@PathVariable Long id) {
         shiftService.deleteShift(id);

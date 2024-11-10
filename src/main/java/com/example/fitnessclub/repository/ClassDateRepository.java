@@ -13,5 +13,4 @@ public interface ClassDateRepository extends JpaRepository<ClassDate, Long> {
 
     @Query("SELECT d.classDetails FROM ClassDate d WHERE d.classDetails.id = ?1")
     ClassDetails findClassDetailsByDateId(Long classId);
-
 }
