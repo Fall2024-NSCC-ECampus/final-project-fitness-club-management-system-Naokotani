@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<table class="table table-striped">
+  <h2 th:if="${shifts.isEmpty()}">No shifts Found for Trainer</h2>
+  <thead>
+  <tr>
+    <th>Class Name</th>
+    <th>Trainer Name</th>
+    <th>Date</th>
+    <th>State Time</th>
+    <th>End Time</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="shift : ${shifts}">
+    <td th:text="${shift.getClassDetails().name}" class="text-left"></td>
+    <td th:text="${shift.getTrainer().getName()}" class="text-left"></td>
+    <td th:text="${shift.getDate()}" class="text-left"></td>
+    <td th:text="${shift.getStartTime()}" class="text-left"></td>
+    <td th:text="${shift.getEndTime()}" class="text-left"></td>
+    <td>
+      <form th:action="@{/admin/shift/update/{id}(id=${shift.id})}" method="post">
+        <button type="submit" class="btn btn-primary mb-3">Update</button>
+      </form>
+    </td>
+    <td>
+      <form th:action="@{/admin/shift/delete/{id}(id=${shift.id})}" method="post">
+        <button type="submit" class="btn btn-primary mb-3">Delete</button>
+      </form>
+    </td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>

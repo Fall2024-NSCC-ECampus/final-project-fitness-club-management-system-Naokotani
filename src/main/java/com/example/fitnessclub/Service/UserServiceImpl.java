@@ -18,10 +18,10 @@ public class UserServiceImpl implements UserService {
         this.userRepository = userRepository;
     }
 
-    public UserRequest findUserRequestById(long id) throws UserNotFound {
+    @Override
+    public UserRequest findUserRequestById(Long id) throws UserNotFound {
         return new UserRequest(findUserById(id));
     }
-
 
     @Override
     public List<User> findUsers() {
@@ -29,7 +29,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findUserById(long id) throws UserNotFound {
+    public User findUserById(Long id) throws UserNotFound {
         return userRepository.findById(id).orElseThrow(() -> new UserNotFound(id));
     }
 
@@ -38,7 +38,7 @@ public class UserServiceImpl implements UserService {
     }
 
     public List<User> findMembers() {
-        return userRepository.findAll();
+        return userRepository.findUsersByRole("MEMBER").orElseThrow();
     }
 
     @Override

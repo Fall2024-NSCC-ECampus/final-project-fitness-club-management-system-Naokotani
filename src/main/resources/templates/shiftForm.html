@@ -13,28 +13,23 @@
 </head>
 <body>
 <div class="container">
-  <form action="#" th:action="@{/shift}" th:object="${shiftRequest}" method="post">
+  <form action="#" th:action="@{/admin/shift/create/{id}(id=${id})}" th:object="${shiftRequest}" method="post">
     <div class="row justify-content-center">
       <div class="col-md-6">
         <h2 class="text-center">Shift Request</h2>
         <div class="mb-3">
-          <label for="classId" class="form-label">Class ID:</label>
-          <input type="number" id="classId" class="form-control" th:field="*{classId}" required />
+          <label for="class">Select Class:</label>
+          <select id="class" name="classId">
+            <option value="" disabled selected>Select a class</option>
+            <th:block th:each="class : ${classes}">
+              <option th:value="${class.id}" th:text="${class.name}"></option>
+            </th:block>
+          </select>
           <ul class="red-text">
             <th:block th:each="error : ${#fields.errors('classId')}">
               <li class="text-danger" th:text="${error}"></li>
             </th:block>
             <li th:if="${classDetailsNotFound}" class="text-danger" th:text="${classDetailsNotFound}"></li>
-          </ul>
-        </div>
-        <div class="mb-3">
-          <label for="trainerId" class="form-label">Trainer ID:</label>
-          <input type="number" id="trainerId" class="form-control" th:field="*{trainerId}" required />
-          <ul class="red-text">
-            <th:block th:each="error : ${#fields.errors('trainerId')}">
-              <li class="text-danger" th:text="${error}"></li>
-            </th:block>
-            <li th:if="${trainerNotFound}" class="text-danger" th:text="${trainerNotFound}"></li>
           </ul>
         </div>
         <div class="mb-3">
@@ -59,6 +54,7 @@
           <label for="endTimeString" class="form-label">End Time (HH:MM):</label>
           <input type="text" id="endTimeString" class="form-control" th:field="*{endTimeString}" required />
         </div>
+        <button type="submit" class="btn btn-primary w-100" id="submit-registration-form">Submit</button>
       </div>
     </div>
   </form>

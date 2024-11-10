@@ -11,7 +11,7 @@
     <th>First Name</th>
     <th>Last Name</th>
     <th>Email</th>
-    <th>ID</th>
+    <th></th>
   </tr>
   </thead>
   <tbody>
@@ -29,6 +29,16 @@
       <form th:action="@{/admin/user/delete/{id}(id=${user.id})}" method="post">
         <button type="submit" class="btn btn-primary mb-3">Delete</button>
       </form>
+    </td>
+    <td>
+      <button>
+        <a class="btn btn-primary mb-3" th:href="@{/admin/shifts/{id}(id=${user.id})}">View Shifts</a>
+      </button>
+    </td>
+    <td>
+      <button>
+        <a class="btn btn-primary mb-3" th:href="@{/admin/shift/create/{id}(id=${user.id})}">Add Shift</a>
+      </button>
     </td>
   </tr>
   </tbody>

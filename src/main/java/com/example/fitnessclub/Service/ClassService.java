@@ -4,9 +4,12 @@ import com.example.fitnessclub.exceptions.ClassDetailsNotFound;
 import com.example.fitnessclub.model.ClassDetails;
 import com.example.fitnessclub.request.ClassRequest;
 
+import java.util.List;
+
 public interface ClassService {
     void createClass(ClassRequest classRequest);
     void updateClassName(String newName, long id);
     void deleteClass(long id);
     ClassDetails findClassDetails(long id) throws ClassDetailsNotFound;
+    List<ClassDetails> findAll();
 }

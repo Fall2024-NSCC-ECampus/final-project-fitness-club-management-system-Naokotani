@@ -6,12 +6,19 @@ import com.example.fitnessclub.repository.ClassRepository;
 import com.example.fitnessclub.request.ClassRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ClassServiceImpl implements ClassService {
     private final ClassRepository classRepository;
 
     public ClassServiceImpl(ClassRepository classRepository) {
         this.classRepository = classRepository;
+    }
+
+    @Override
+    public List<ClassDetails> findAll() {
+        return classRepository.findAll();
     }
 
     @Override

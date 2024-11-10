@@ -1,12 +1,12 @@
 package com.example.fitnessclub.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Data
+@Getter
+@Setter
 @IdClass(RoleId.class)
 @Table(name="roles")
 public class Role {

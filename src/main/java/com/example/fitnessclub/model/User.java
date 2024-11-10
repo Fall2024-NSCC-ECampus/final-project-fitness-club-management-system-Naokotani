@@ -65,6 +65,10 @@ public class User {
         roles.add(new Role(this, role));
     }
 
+    public String getName() {
+        return firstName + " " + lastName;
+    }
+
     @Override
     public String toString() {
         return "User{" +
