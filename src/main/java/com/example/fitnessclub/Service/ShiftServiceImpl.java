@@ -3,7 +3,6 @@ package com.example.fitnessclub.Service;
 import com.example.fitnessclub.exceptions.ClassDetailsNotFound;
 import com.example.fitnessclub.exceptions.ShiftNotFound;
 import com.example.fitnessclub.exceptions.TrainerNotFound;
-import com.example.fitnessclub.model.ClassDate;
 import com.example.fitnessclub.model.ClassDetails;
 import com.example.fitnessclub.model.Shift;
 import com.example.fitnessclub.repository.ShiftRepository;

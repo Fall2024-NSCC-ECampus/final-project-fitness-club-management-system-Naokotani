@@ -17,9 +17,12 @@ public class Attendance {
     @OneToOne
     private ClassDate classDate;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<User> trainers;
-
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany
     private Set<User> members;
+
+    public Attendance(ClassDate classDate,
+                      Set<User> members) {
+        this.classDate = classDate;
+        this.members = members;
+    }
 }

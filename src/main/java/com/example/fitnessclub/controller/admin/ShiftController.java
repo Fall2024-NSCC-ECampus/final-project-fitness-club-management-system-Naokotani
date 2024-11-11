@@ -46,7 +46,7 @@ public class ShiftController {
      */
     @PostMapping("/admin/shift/form/{id}")
     public String createShiftForm(@PathVariable Long id, @RequestParam Long classId, Model model) {
-        model.addAttribute("dates", classService.findClassDates(classId));
+        model.addAttribute("dates", classService.findClassDatesById(classId));
         model.addAttribute("trainer", id);
         return "shiftForm";
     }

@@ -14,7 +14,9 @@ public interface ClassService {
     void deleteClass(long id);
     ClassDetails findClassDetails(Long id) throws ClassDetailsNotFound;
     List<ClassDetails> findAll();
-    List<ClassDate> findClassDates(Long id);
+    //TODO what id?
+    List<ClassDate> findClassDatesById(Long id);
+    List<ClassDate> findClassDates();
     ClassDate findClassDateById(Long id);
     ClassDetails findClassDetailsByDateId(Long id);
     void createClassDate(ClassDateRequest classDate, Long id);
