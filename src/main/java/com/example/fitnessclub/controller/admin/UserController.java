@@ -13,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +22,7 @@ import java.util.List;
  * CRUD Controller for Admin user commands
  */
 @Log4j2
+@RequestMapping("/admin/")
 @Controller
 public class UserController {
     private final UserService userService;
@@ -46,7 +48,7 @@ public class UserController {
      * @param model The view model
      * @return welcome.html or register.html on error.
      */
-    @PostMapping("/admin/user/create")
+    @PostMapping("user/create")
     public String createUser(@Valid UserRequest userRequest,
                              BindingResult bindingResult, Model model) {
         if(bindingResult.hasErrors()) {
@@ -71,7 +73,7 @@ public class UserController {
      * @param model the view model
      * @return register.html
      */
-    @GetMapping("/admin/user/create")
+    @GetMapping("user/create")
     public String createUserForm(Model model) {
         model.addAttribute("user", new UserRequest());
         return "register";
@@ -86,7 +88,7 @@ public class UserController {
      * @param model the mode for the view
      * @return users.html
      */
-    @GetMapping("/admin/users")
+    @GetMapping("users")
     public String listUsers(Model model) {
         model.addAttribute("user", new User());
         model.addAttribute("users", userService.findUsers());
@@ -99,7 +101,7 @@ public class UserController {
      * @param model view model
      * @return users.html with trainers in an html table.
      */
-    @GetMapping("/admin/trainers")
+    @GetMapping("users/trainers")
     public String listTrainers(Model model) {
         model.addAttribute("classes", classService.findAll());
         model.addAttribute("users", userService.findTrainers());
@@ -111,7 +113,7 @@ public class UserController {
      * @param model view model
      * @return users.html with trainers in an html table.
      */
-    @GetMapping("/admin/members")
+    @GetMapping("users/members")
     public String listMembers(Model model) {
         model.addAttribute("users", userService.findMembers());
         return "users";
@@ -123,7 +125,7 @@ public class UserController {
      * @param model view model
      * @return users.html
      */
-    @GetMapping("/admin/users/{id}")
+    @GetMapping("users/{id}")
     public String getUserByID(@PathVariable Long id, Model model) {
         List<User> users = new ArrayList<>();
         users.add(userService.findUserById(id));
@@ -141,7 +143,7 @@ public class UserController {
      * @param model the view model
      * @return updateUserForm.html
      */
-    @GetMapping("/admin/user/update/{id}")
+    @GetMapping("user/update/{id}")
     public String updateUserForm(@PathVariable Long id, Model model) {
         model.addAttribute("id", id);
         model.addAttribute("user", userService.findUserRequestById(id));
@@ -156,7 +158,7 @@ public class UserController {
      * @param model the view model
      * @return welcome.html or updateUserForm.html on error.
      */
-    @PostMapping("/admin/user/update/{id}")
+    @PostMapping("user/update/{id}")
     public String updateUser(@Valid UserRequest userRequest,
                              @PathVariable Long id,
                              BindingResult bindingResult,
@@ -179,7 +181,7 @@ public class UserController {
      * @param id The id of the user to be deleted.
      * @return List of users.
      */
-    @PostMapping("/admin/user/delete/{id}")
+    @PostMapping("user/delete/{id}")
     public String deleteUser(@PathVariable Long id) {
         userService.deleteUser(id);
         return "redirect:/admin/users";

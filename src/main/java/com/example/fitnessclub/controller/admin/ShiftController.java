@@ -12,6 +12,7 @@ import java.util.List;
 /**
  * CRUD controller for shifts
  */
+@RequestMapping("/admin/")
 @Controller
 public class ShiftController {
     private final ShiftService shiftService;
@@ -30,7 +31,7 @@ public class ShiftController {
      * Creates a new shift
      * @return welcome.html or shiftForm.html on error.
      */
-    @PostMapping("/admin/shift/create/")
+    @PostMapping("shift/create/")
     public String createShift(@RequestParam("trainerId") Long trainerId,
                               @RequestParam("classId") Long classId,
                               @RequestParam("dateId") Long dateId) {
@@ -43,7 +44,7 @@ public class ShiftController {
      * @param model The view model.
      * @return shiftForm.html.
      */
-    @PostMapping("/admin/shift/form/{id}")
+    @PostMapping("shift/form/{id}")
     public String createShiftForm(@PathVariable Long id, @RequestParam Long classId, Model model) {
         model.addAttribute("dates", classService.findClassDatesById(classId));
         model.addAttribute("trainer", id);
@@ -59,7 +60,7 @@ public class ShiftController {
      * @param model view model
      * @return shifts.html
      */
-    @GetMapping("/admin/shifts/trainer/{id}")
+    @GetMapping("shifts/trainer/{id}")
     public String listShifts(@PathVariable Long id, Model model) {
         model.addAttribute("shifts", shiftService.findShiftsByTrainerId(id));
         return "shifts";
@@ -70,7 +71,7 @@ public class ShiftController {
      * @param model view model
      * @return shifts.html
      */
-    @GetMapping("/admin/shifts/{id}")
+    @GetMapping("shifts/{id}")
     public String listShiftsById(@PathVariable Long id, Model model) {
         List<Shift> shifts = shiftService.findByTrainerId(id);
         model.addAttribute("shifts", shifts);
@@ -80,10 +81,9 @@ public class ShiftController {
     /*
      * Destroy
      */
-    @PostMapping("/admin/shift/delete/{id}")
+    @PostMapping("shift/delete/{id}")
     public String deleteShift(@PathVariable Long id) {
         shiftService.deleteShift(id);
         return "redirect:/admin/shifts";
     }
-
 }
