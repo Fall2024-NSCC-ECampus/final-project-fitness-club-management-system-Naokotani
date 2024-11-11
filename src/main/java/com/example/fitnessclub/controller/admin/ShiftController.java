@@ -1,8 +1,7 @@
 package com.example.fitnessclub.controller.admin;
 
-import com.example.fitnessclub.Service.ClassService;
-import com.example.fitnessclub.Service.ClassServiceImpl;
-import com.example.fitnessclub.Service.ShiftService;
+import com.example.fitnessclub.service.ClassService;
+import com.example.fitnessclub.service.ShiftService;
 import com.example.fitnessclub.model.Shift;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,9 +17,9 @@ public class ShiftController {
     private final ShiftService shiftService;
     private final ClassService classService;
 
-    public ShiftController(ShiftService shiftService, ClassServiceImpl classServiceImpl) {
+    public ShiftController(ShiftService shiftService, ClassService classService) {
         this.shiftService = shiftService;
-        this.classService = classServiceImpl;
+        this.classService = classService;
     }
 
     /*

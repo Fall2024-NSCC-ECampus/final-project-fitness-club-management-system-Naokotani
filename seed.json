@@ -1,0 +1,159 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "email": "admin@fitnessclub.com",
+      "first_name": "Admin",
+      "last_name": "User",
+      "password": "admin123"
+    },
+    {
+      "id": 2,
+      "email": "trainer@fitnessclub.com",
+      "first_name": "John",
+      "last_name": "Doe",
+      "password": "trainer123"
+    },
+    {
+      "id": 3,
+      "email": "member@fitnessclub.com",
+      "first_name": "Jane",
+      "last_name": "Smith",
+      "password": "member123"
+    }
+  ],
+
+  "roles": [
+    {
+      "role": "ADMIN",
+      "user_id_id": 1
+    },
+    {
+      "role": "TRAINER",
+      "user_id_id": 2
+    },
+    {
+      "role": "MEMBER",
+      "user_id_id": 3
+    }
+  ],
+
+  "class_details": [
+    {
+      "id": 1,
+      "name": "Yoga"
+    },
+    {
+      "id": 2,
+      "name": "Pilates"
+    },
+    {
+      "id": 3,
+      "name": "Spin"
+    }
+  ],
+
+  "class_date": [
+    {
+      "id": 1,
+      "date": "2024-11-15",
+      "start_time": "08:00:00",
+      "end_time": "09:00:00",
+      "class_details_id": 1
+    },
+    {
+      "id": 2,
+      "date": "2024-11-15",
+      "start_time": "09:00:00",
+      "end_time": "10:00:00",
+      "class_details_id": 2
+    },
+    {
+      "id": 3,
+      "date": "2024-11-15",
+      "start_time": "10:00:00",
+      "end_time": "11:00:00",
+      "class_details_id": 3
+    }
+  ],
+
+  "attendance": [
+    {
+      "id": 1,
+      "class_date_id": 1
+    },
+    {
+      "id": 2,
+      "class_date_id": 2
+    },
+    {
+      "id": 3,
+      "class_date_id": 3
+    }
+  ],
+
+  "attendance_members": [
+    {
+      "attendance_id": 1,
+      "members_id": 3
+    },
+    {
+      "attendance_id": 2,
+      "members_id": 3
+    }
+  ],
+
+  "shift": [
+    {
+      "id": 1,
+      "class_date_id": 1,
+      "class_details_id": 1,
+      "trainer_id": 2
+    },
+    {
+      "id": 2,
+      "class_date_id": 2,
+      "class_details_id": 2,
+      "trainer_id": 2
+    },
+    {
+      "id": 3,
+      "class_date_id": 3,
+      "class_details_id": 3,
+      "trainer_id": 2
+    }
+  ],
+
+  "users_roles": [
+    {
+      "user_id": 1,
+      "roles_role": "ADMIN",
+      "roles_user_id_id": 1
+    },
+    {
+      "user_id": 2,
+      "roles_role": "TRAINER",
+      "roles_user_id_id": 2
+    },
+    {
+      "user_id": 3,
+      "roles_role": "MEMBER",
+      "roles_user_id_id": 3
+    }
+  ],
+
+  "class_details_dates": [
+    {
+      "class_details_id": 1,
+      "dates_id": 1
+    },
+    {
+      "class_details_id": 2,
+      "dates_id": 2
+    },
+    {
+      "class_details_id": 3,
+      "dates_id": 3
+    }
+  ]
+}

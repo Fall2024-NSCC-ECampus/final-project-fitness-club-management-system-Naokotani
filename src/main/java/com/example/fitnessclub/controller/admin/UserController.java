@@ -1,10 +1,10 @@
 package com.example.fitnessclub.controller.admin;
 
-import com.example.fitnessclub.Service.*;
+import com.example.fitnessclub.service.*;
 import com.example.fitnessclub.exceptions.EmptyRoleSet;
 import com.example.fitnessclub.exceptions.UserExists;
 import com.example.fitnessclub.model.User;
-import com.example.fitnessclub.request.UserRequest;
+import com.example.fitnessclub.dto.UserRequest;
 import jakarta.validation.Valid;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
@@ -24,16 +24,15 @@ import java.util.List;
 @Controller
 public class UserController {
     private final UserService userService;
-    private final UserRegistrationServiceImpl userRegistrationService;
+    private final UserRegistrationService userRegistrationService;
     private final ClassService classService;
 
-    public UserController(UserServiceImpl userService,
-                          UserRegistrationServiceImpl userRegistrationService,
-                          ClassServiceImpl classServiceImpl
-    ) {
+    public UserController(UserService userService,
+                          UserRegistrationService userRegistrationService,
+                          ClassService classService) {
         this.userService = userService;
         this.userRegistrationService = userRegistrationService;
-        this.classService = classServiceImpl;
+        this.classService = classService;
     }
 
     /*

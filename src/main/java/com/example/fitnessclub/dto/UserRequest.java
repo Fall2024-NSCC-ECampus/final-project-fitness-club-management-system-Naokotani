@@ -1,4 +1,4 @@
-package com.example.fitnessclub.request;
+package com.example.fitnessclub.dto;
 
 import com.example.fitnessclub.model.User;
 import jakarta.validation.constraints.Email;
@@ -32,6 +32,7 @@ public class UserRequest {
     @Email
     private String email;
 
+    //TODO turn on validation
 //    @Size(min=8, message="Password must be at least 8 characters")
 //    @Pattern(regexp="^(?=.*[A-Z]).+$", message="Must contain at least one upper case letter")
 //    @Pattern(regexp="^(?=.*[a-z]).+$", message="Must contain at least one lower case letter")

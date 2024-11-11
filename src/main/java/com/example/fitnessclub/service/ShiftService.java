@@ -1,7 +1,6 @@
-package com.example.fitnessclub.Service;
+package com.example.fitnessclub.service;
 
 import com.example.fitnessclub.exceptions.ShiftNotFound;
-import com.example.fitnessclub.model.ClassDate;
 import com.example.fitnessclub.model.ClassDetails;
 import com.example.fitnessclub.model.Shift;
 

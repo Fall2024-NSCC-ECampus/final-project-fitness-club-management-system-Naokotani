@@ -1,4 +1,4 @@
-package com.example.fitnessclub.Service;
+package com.example.fitnessclub.service;
 
 import com.example.fitnessclub.exceptions.ClassDetailsNotFound;
 import com.example.fitnessclub.exceptions.ShiftNotFound;

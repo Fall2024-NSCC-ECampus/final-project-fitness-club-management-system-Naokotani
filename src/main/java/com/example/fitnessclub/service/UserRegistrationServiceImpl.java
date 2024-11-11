@@ -1,9 +1,9 @@
-package com.example.fitnessclub.Service;
+package com.example.fitnessclub.service;
 
 import com.example.fitnessclub.exceptions.EmptyRoleSet;
 import com.example.fitnessclub.exceptions.UserExists;
 import com.example.fitnessclub.model.User;
-import com.example.fitnessclub.request.UserRequest;
+import com.example.fitnessclub.dto.UserRequest;
 import com.example.fitnessclub.model.UserRoles;
 import com.example.fitnessclub.repository.UserRepository;
 import org.springframework.stereotype.Service;

@@ -1,11 +1,13 @@
 package com.example.fitnessclub.shell;
 
-import com.example.fitnessclub.Service.UserRegistrationService;
-import com.example.fitnessclub.Service.UserRegistrationServiceImpl;
+import com.example.fitnessclub.service.UserRegistrationService;
+import com.example.fitnessclub.service.UserRegistrationServiceImpl;
+import com.example.fitnessclub.service.UserService;
+import com.example.fitnessclub.service.UserServiceImpl;
 import com.example.fitnessclub.exceptions.UserExists;
 import com.example.fitnessclub.model.User;
 import com.example.fitnessclub.model.UserRoles;
-import com.example.fitnessclub.repository.UserRepository;
+import com.example.fitnessclub.repository.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -20,10 +22,20 @@ import java.util.*;
 public class LaunchShell {
     private final UserRepository userRepository;
     private final UserRegistrationService userRegistrationService;
+    private final AttendanceRepository attendanceRepository;
+    private final ClassRepository classRepository;
+    private final ClassDateRepository classDateRepository;
+    private final ShiftRepository shiftRepository;
+    private final UserService userService;
 
-    public LaunchShell(UserRepository userRepository) {
+    public LaunchShell(UserRepository userRepository, AttendanceRepository attendanceRepository, ClassRepository classRepository, ClassDateRepository classDateRepository, ShiftRepository shiftRepository) {
         this.userRepository = userRepository;
         this.userRegistrationService = new UserRegistrationServiceImpl(userRepository);
+        this.attendanceRepository = attendanceRepository;
+        this.classRepository = classRepository;
+        this.classDateRepository = classDateRepository;
+        this.shiftRepository = shiftRepository;
+        this.userService = new UserServiceImpl(userRepository);
     }
 
     @ShellMethod("List registered admins")
@@ -42,6 +54,13 @@ public class LaunchShell {
         return String.format("Deleted user with id %d", id);
     }
 
+    @ShellMethod("Seed the database with starter data")
+    public String seedData(){
+        SeedData seedData = new SeedData(userRepository, attendanceRepository, classRepository, classDateRepository,
+                shiftRepository, userRegistrationService, userService);
+        seedData.insert();
+        return "Data seed successfully";
+    }
 
     @ShellMethod("Register new Admin" )
     public void registerAdmin(

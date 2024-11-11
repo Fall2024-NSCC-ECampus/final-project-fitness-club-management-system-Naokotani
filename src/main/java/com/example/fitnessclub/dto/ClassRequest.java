@@ -1,4 +1,4 @@
-package com.example.fitnessclub.request;
+package com.example.fitnessclub.dto;
 
 import com.example.fitnessclub.model.ClassDate;
 import lombok.AllArgsConstructor;

@@ -24,4 +24,8 @@ public class ClassDetails {
         this.name = name;
         this.dates = dates;
     }
+
+    public ClassDetails(String name) {
+        this.name = name;
+    }
 }

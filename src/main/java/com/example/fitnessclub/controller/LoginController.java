@@ -17,7 +17,6 @@ public class LoginController {
         this.userRepository = userRepository;
     }
 
-
     @GetMapping("/users")
     @ResponseBody
     public ResponseEntity<List<User>> getUsers() {

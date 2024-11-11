@@ -1,6 +1,6 @@
 package com.example.fitnessclub.controller.trainer;
 
-import com.example.fitnessclub.Service.*;
+import com.example.fitnessclub.service.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

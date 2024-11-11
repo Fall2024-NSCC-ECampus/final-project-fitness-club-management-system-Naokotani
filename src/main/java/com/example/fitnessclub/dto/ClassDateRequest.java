@@ -1,4 +1,4 @@
-package com.example.fitnessclub.request;
+package com.example.fitnessclub.dto;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.*;

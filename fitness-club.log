@@ -73,3 +73,14 @@
 1730676479888:register-admin -f Chris -l Hughes -e chris@chris-hughes.dev -p secret -u -t
 1731282115442:it
 1731282116791:quit
+1731289697993:help
+1731289701904:seed-data
+1731289709346:full stacktrace
+1731289713090:stacktrace
+1731289906541:seed-data
+1731290176044:>seed-data
+1731290179889:seed-data
+1731290191336:stacktrace
+1731290443269:seed-data
+1731292311743:>seed-data
+1731292316450:seed-data

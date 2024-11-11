@@ -1,10 +1,10 @@
-package com.example.fitnessclub.Service;
+package com.example.fitnessclub.service;
 
 import com.example.fitnessclub.exceptions.ClassDetailsNotFound;
 import com.example.fitnessclub.model.ClassDate;
 import com.example.fitnessclub.model.ClassDetails;
-import com.example.fitnessclub.request.ClassDateRequest;
-import com.example.fitnessclub.request.ClassRequest;
+import com.example.fitnessclub.dto.ClassDateRequest;
+import com.example.fitnessclub.dto.ClassRequest;
 
 import java.util.List;
 

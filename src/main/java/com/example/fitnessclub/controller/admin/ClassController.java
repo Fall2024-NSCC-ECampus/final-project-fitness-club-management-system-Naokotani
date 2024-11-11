@@ -1,12 +1,11 @@
 package com.example.fitnessclub.controller.admin;
 
-import com.example.fitnessclub.Service.ClassService;
+import com.example.fitnessclub.service.ClassService;
 import com.example.fitnessclub.exceptions.ClassDetailsNotFound;
 import com.example.fitnessclub.exceptions.TrainerNotFound;
-import com.example.fitnessclub.model.ClassDate;
 import com.example.fitnessclub.model.ClassDetails;
-import com.example.fitnessclub.request.ClassDateRequest;
-import com.example.fitnessclub.request.ClassRequest;
+import com.example.fitnessclub.dto.ClassDateRequest;
+import com.example.fitnessclub.dto.ClassRequest;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

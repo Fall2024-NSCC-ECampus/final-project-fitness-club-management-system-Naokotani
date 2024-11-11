@@ -1,8 +1,8 @@
-package com.example.fitnessclub.Service;
+package com.example.fitnessclub.service;
 
 import com.example.fitnessclub.exceptions.UserNotFound;
 import com.example.fitnessclub.model.User;
-import com.example.fitnessclub.request.UserRequest;
+import com.example.fitnessclub.dto.UserRequest;
 
 import java.util.List;
 

@@ -1,14 +1,14 @@
-package com.example.fitnessclub.Service;
+package com.example.fitnessclub.service;
 
 import com.example.fitnessclub.exceptions.TrainerNotFound;
 import com.example.fitnessclub.exceptions.UserNotFound;
 import com.example.fitnessclub.model.User;
+import com.example.fitnessclub.model.UserRoles;
 import com.example.fitnessclub.repository.UserRepository;
-import com.example.fitnessclub.request.UserRequest;
+import com.example.fitnessclub.dto.UserRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -33,12 +33,14 @@ public class UserServiceImpl implements UserService {
         return userRepository.findById(id).orElseThrow(() -> new UserNotFound(id));
     }
 
+    @Override
     public List<User> findTrainers(){
-        return userRepository.findUsersByRole("TRAINER").orElseThrow();
+        return userRepository.findUsersByRole(UserRoles.TRAINER).orElseThrow();
     }
 
+    @Override
     public List<User> findMembers() {
-        return userRepository.findUsersByRole("MEMBER").orElseThrow();
+        return userRepository.findUsersByRole(UserRoles.MEMBER).orElseThrow();
     }
 
     @Override

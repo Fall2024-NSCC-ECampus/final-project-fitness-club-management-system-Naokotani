@@ -1,4 +1,4 @@
-package com.example.fitnessclub.Service;
+package com.example.fitnessclub.service;
 
 import com.example.fitnessclub.model.Attendance;
 import com.example.fitnessclub.repository.AttendanceRepository;
@@ -19,9 +19,10 @@ public class AttendanceServiceImpl implements AttendanceService {
         this.userService = userService;
     }
 
+    //TODO improve error handling of unfound IDs
     @Override
-    public void createAttendance(List<Long> memberIds, Long classDateId) {
-        attendanceRepository.save(new Attendance(classService.findClassDateById(classDateId),
+    public Attendance createAttendance(List<Long> memberIds, Long classDateId) {
+        return attendanceRepository.save(new Attendance(classService.findClassDateById(classDateId),
                 memberIds.stream().map(userService::findUserById).collect(Collectors.toSet())));
     }
 }
