@@ -35,12 +35,12 @@ public class LaunchShell {
         this.classRepository = classRepository;
         this.classDateRepository = classDateRepository;
         this.shiftRepository = shiftRepository;
-        this.userService = new UserServiceImpl(userRepository);
+        this.userService = new UserServiceImpl(userRepository, shiftRepository);
     }
 
     @ShellMethod("List registered admins")
     public void listAdmins() {
-        Optional<List<User>> admins = userRepository.findAdmins();
+        Optional<List<User>> admins = userRepository.findUsersByRole(UserRoles.ADMIN);
         if(admins.isEmpty()) {
             System.out.println("No Admins currently registered");
         } else {
@@ -56,11 +56,13 @@ public class LaunchShell {
 
     @ShellMethod("Seed the database with starter data")
     public String seedData(){
-        SeedData seedData = new SeedData(userRepository, attendanceRepository, classRepository, classDateRepository,
+        SeedData seedData = new SeedData(attendanceRepository, classRepository, classDateRepository,
                 shiftRepository, userRegistrationService, userService);
         seedData.insert();
         return "Data seed successfully";
     }
+
+
 
     @ShellMethod("Register new Admin" )
     public void registerAdmin(

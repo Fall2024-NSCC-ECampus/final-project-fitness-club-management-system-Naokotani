@@ -58,6 +58,6 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
     }
 
     private boolean userExists(User user) {
-        return userRepository.emailExists(user.getEmail()).isPresent();
+        return userRepository.findByEmail(user.getEmail()).isPresent();
     }
 }

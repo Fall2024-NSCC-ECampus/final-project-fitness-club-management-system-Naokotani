@@ -1,21 +1,21 @@
 package com.example.fitnessclub.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Shift {
     @Id
+    @GeneratedValue
     private int id;
 
     @NotNull
-    @OneToOne
+    @ManyToOne
     private ClassDetails classDetails;
 
     @NotNull
@@ -23,7 +23,7 @@ public class Shift {
     private ClassDate classDate;
 
     @NotNull
-    @OneToOne
+    @ManyToOne
     private User trainer;
 
     public Shift(ClassDetails classDetails, User user, ClassDate classDate) {

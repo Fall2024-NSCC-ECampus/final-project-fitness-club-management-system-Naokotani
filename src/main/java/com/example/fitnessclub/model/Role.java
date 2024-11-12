@@ -1,34 +1,25 @@
 package com.example.fitnessclub.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Getter
 @Setter
-@IdClass(RoleId.class)
-@Table(name="roles")
+@NoArgsConstructor
+@AllArgsConstructor
 public class Role {
-
     @Id
-    @ManyToOne(fetch = FetchType.EAGER)
-    private User userId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    @Id
-    @Column(name="role")
     @Enumerated(EnumType.STRING)
     private UserRoles role;
 
-    public Role() {}
-
-    public Role(User user, UserRoles role) {
-        this.userId = user;
-        this.role = role;
+    public Role(UserRoles role) {
+           this.role = role;
     }
-
-    public void setUser(User user) {
-        this.userId = user;
-    }
-
 }

@@ -67,7 +67,7 @@ public class ShiftServiceImpl implements ShiftService {
 
     @Override
     public List<Shift> findClassDateByTrainerId(Long id) {
-        return shiftRepository.findClassDateByTrainerId(id);
+        return shiftRepository.findShiftByTrainerId(id);
     }
 
     // TODO fix this!

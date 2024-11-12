@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotBlank;
 import java.util.HashSet;
 import java.util.Set;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -15,31 +16,29 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="users")
 public class User {
-
     @Id
     @GeneratedValue
     private Long id;
 
     @NotBlank
-    @Column(name = "first_name",nullable = false)
+    @NotNull
     private String firstName;
 
     @NotBlank
-    @Column(name = "last_name", nullable = false)
+    @NotNull
     private String lastName;
 
     @NotBlank
     @Email
-    @Column(name="email", nullable = false, unique = true)
+    @NotNull
     private String email;
 
     @NotBlank
-    @Column(name="password", nullable = false)
+    @NotNull
     private String password;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Role> roles = new HashSet<>();
 
     private final static PasswordEncoder passwordEncoder =
@@ -62,7 +61,7 @@ public class User {
     }
 
     public void addRole(UserRoles role) {
-        roles.add(new Role(this, role));
+        roles.add(new Role(role));
     }
 
     public String getName() {

@@ -17,7 +17,7 @@ public class Attendance {
     @OneToOne
     private ClassDate classDate;
 
-    @OneToMany
+    @ManyToMany
     private Set<User> members;
 
     public Attendance(ClassDate classDate,

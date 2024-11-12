@@ -1,17 +1,12 @@
 package com.example.fitnessclub.dto;
 
 import com.example.fitnessclub.model.ClassDate;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+
 import java.util.HashSet;
 import java.util.Set;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
 public class ClassRequest {
     private String name;
     private Set<ClassDate> dates = new HashSet<>();

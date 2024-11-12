@@ -16,7 +16,7 @@ public class ClassDate {
     @GeneratedValue
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private ClassDetails classDetails;
 
     @NotNull

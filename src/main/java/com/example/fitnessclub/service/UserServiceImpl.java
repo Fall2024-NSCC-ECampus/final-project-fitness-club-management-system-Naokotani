@@ -2,20 +2,26 @@ package com.example.fitnessclub.service;
 
 import com.example.fitnessclub.exceptions.TrainerNotFound;
 import com.example.fitnessclub.exceptions.UserNotFound;
+import com.example.fitnessclub.model.Role;
 import com.example.fitnessclub.model.User;
 import com.example.fitnessclub.model.UserRoles;
+import com.example.fitnessclub.repository.ShiftRepository;
 import com.example.fitnessclub.repository.UserRepository;
 import com.example.fitnessclub.dto.UserRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
+    private final ShiftRepository shiftRepository;
 
-    public UserServiceImpl(UserRepository userRepository) {
+    public UserServiceImpl(UserRepository userRepository, ShiftRepository shiftRepository) {
         this.userRepository = userRepository;
+        this.shiftRepository = shiftRepository;
     }
 
     @Override
@@ -44,18 +50,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteMemeber(long id) {
-        userRepository.deleteById(id);
-    }
-
-    @Override
-    public void deleteTrainer(long id) {
-       userRepository.deleteById(id);
-    }
-
-    @Override
+    @Transactional
     public void deleteUser(long id) throws UserNotFound {
-        userRepository.findById(id).orElseThrow(() -> new UserNotFound(id));
+        User user = userRepository.findById(id).orElseThrow(() -> new UserNotFound(id));
+        Set<Role> roles = user.getRoles();
+        roles.stream().filter(role -> role.getRole() == UserRoles.TRAINER)
+                .forEach(role -> shiftRepository.deleteByTrainerId(user.getId()));
         userRepository.deleteById(id);
     }
 
@@ -63,12 +63,6 @@ public class UserServiceImpl implements UserService {
     public void updateMember(UserRequest user, long id) {
         User member = findTrainer(id);
         userRepository.save(updateUser(member, user));
-    }
-
-    @Override
-    public void updateTrainer(UserRequest user, long id) throws TrainerNotFound {
-        User trainer = findTrainer(id);
-        userRepository.save(updateUser(trainer, user));
     }
 
     private User updateUser(User oldUser, UserRequest newUser) {
@@ -80,5 +74,10 @@ public class UserServiceImpl implements UserService {
 
     private User findTrainer(long id) throws TrainerNotFound {
         return userRepository.findById(id).orElseThrow(() -> new TrainerNotFound(id));
+    }
+
+    @Override
+    public User findUserByEmail(String email) {
+        return userRepository.findByEmail(email).orElseThrow();
     }
 }

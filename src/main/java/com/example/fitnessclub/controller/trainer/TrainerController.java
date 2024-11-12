@@ -1,10 +1,15 @@
 package com.example.fitnessclub.controller.trainer;
 
+import com.example.fitnessclub.model.User;
 import com.example.fitnessclub.service.*;
+import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 @RequestMapping("/trainer/")
@@ -30,9 +35,11 @@ public class TrainerController {
         return "attendance";
     }
 
-    @GetMapping("shifts/{id}")
-    public String trainerShifts(@PathVariable Long id, Model model){
-        model.addAttribute("shifts", shiftService.findClassDateByTrainerId(id));
+    @GetMapping("shifts/")
+    public String trainerShifts(@AuthenticationPrincipal UserDetails userDetails, Model model){
+        if(userDetails == null) return "redirect:/login";
+        User user = userService.findUserByEmail(userDetails.getUsername());
+        model.addAttribute("shifts", shiftService.findClassDateByTrainerId(user.getId()));
         return "trainerClasses";
     }
 
