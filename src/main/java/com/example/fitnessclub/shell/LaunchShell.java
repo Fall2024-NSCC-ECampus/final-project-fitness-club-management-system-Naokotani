@@ -28,14 +28,19 @@ public class LaunchShell {
     private final ShiftRepository shiftRepository;
     private final UserService userService;
 
-    public LaunchShell(UserRepository userRepository, AttendanceRepository attendanceRepository, ClassRepository classRepository, ClassDateRepository classDateRepository, ShiftRepository shiftRepository) {
+    public LaunchShell(UserService userService,
+                       UserRepository userRepository,
+                       AttendanceRepository attendanceRepository,
+                       ClassRepository classRepository,
+                       ClassDateRepository classDateRepository,
+                       ShiftRepository shiftRepository) {
         this.userRepository = userRepository;
         this.userRegistrationService = new UserRegistrationServiceImpl(userRepository);
         this.attendanceRepository = attendanceRepository;
         this.classRepository = classRepository;
         this.classDateRepository = classDateRepository;
         this.shiftRepository = shiftRepository;
-        this.userService = new UserServiceImpl(userRepository, shiftRepository);
+        this.userService = userService;
     }
 
     @ShellMethod("List registered admins")
@@ -61,8 +66,6 @@ public class LaunchShell {
         seedData.insert();
         return "Data seed successfully";
     }
-
-
 
     @ShellMethod("Register new Admin" )
     public void registerAdmin(

@@ -5,6 +5,7 @@ import com.example.fitnessclub.exceptions.UserNotFound;
 import com.example.fitnessclub.model.Role;
 import com.example.fitnessclub.model.User;
 import com.example.fitnessclub.model.UserRoles;
+import com.example.fitnessclub.repository.AttendanceRepository;
 import com.example.fitnessclub.repository.ShiftRepository;
 import com.example.fitnessclub.repository.UserRepository;
 import com.example.fitnessclub.dto.UserRequest;
@@ -18,10 +19,12 @@ import java.util.Set;
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final ShiftRepository shiftRepository;
+    private final AttendanceRepository attendanceRepository;
 
-    public UserServiceImpl(UserRepository userRepository, ShiftRepository shiftRepository) {
+    public UserServiceImpl(UserRepository userRepository, ShiftRepository shiftRepository, AttendanceRepository attendanceRepository) {
         this.userRepository = userRepository;
         this.shiftRepository = shiftRepository;
+        this.attendanceRepository = attendanceRepository;
     }
 
     @Override
@@ -56,6 +59,8 @@ public class UserServiceImpl implements UserService {
         Set<Role> roles = user.getRoles();
         roles.stream().filter(role -> role.getRole() == UserRoles.TRAINER)
                 .forEach(role -> shiftRepository.deleteByTrainerId(user.getId()));
+        roles.stream().filter(role -> role.getRole() == UserRoles.MEMBER)
+                .forEach(role -> attendanceRepository.deleteByMemberId(user.getId()));
         userRepository.deleteById(id);
     }
 
