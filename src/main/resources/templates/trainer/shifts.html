@@ -12,6 +12,7 @@
           crossorigin="anonymous"></script>
 </head>
 <body>
+<div th:replace="fragments/navbar :: navbar"></div>
 <table class="table table-striped">
   <h2 th:if="${shifts.isEmpty()}">No classes</h2>
   <thead>
@@ -31,12 +32,14 @@
     <td th:text="${shift.getClassDate().getEndTime()}" class="text-left"></td>
     <td>
       <form th:action="@{/trainer/attendance/create/{id}(id=${shift.getClassDate().getId()})}" method="get">
-        <button type="submit" class="btn btn-primary mb-3">Do Attendance</button>
+
+        <button th:if="${shift.isAttendance() == false}" type="submit" class="btn btn-primary mb-3">Do Attendance</button>
+        <button th:if="${shift.isAttendance() == true}" type="submit" class="btn btn-primary mb-3" disabled>Do Attendance</button>
       </form>
     </td>
   </tr>
   </tbody>
 </table>
-<div th:replace="fragments/navbar :: footer"></div>
+<div th:replace="fragments/footer :: footer"></div>
 </body>
 </html>

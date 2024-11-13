@@ -70,46 +70,42 @@ public class SeedData {
         pilatesClass=classRepository.save(pilatesClass);
         spinClass=classRepository.save(spinClass);
 
-        ClassDate yogaDate = classDateRepository.save(new ClassDate(yogaClass, LocalDate.of(2024, 11, 15), LocalTime.of(8, 0), LocalTime.of(9, 0)));
-        ClassDate yogaDate2 = classDateRepository.save(new ClassDate(yogaClass, LocalDate.of(2024, 11, 16), LocalTime.of(8, 0), LocalTime.of(9, 0)));
+        classDateRepository.save(new ClassDate(yogaClass, LocalDate.of(2024, 11, 15), LocalTime.of(8, 0), LocalTime.of(9, 0)));
+        classDateRepository.save(new ClassDate(yogaClass, LocalDate.of(2024, 11, 16), LocalTime.of(8, 0), LocalTime.of(9, 0)));
         classDateRepository.save(new ClassDate(yogaClass, LocalDate.of(2024, 11, 17), LocalTime.of(8, 0), LocalTime.of(9, 0)));
 
-        ClassDate pilatesDate = classDateRepository.save(new ClassDate(pilatesClass, LocalDate.of(2024, 11, 15), LocalTime.of(9, 0), LocalTime.of(10, 0)));
-        ClassDate pilatesDate2 = classDateRepository.save(new ClassDate(pilatesClass, LocalDate.of(2024, 11, 16), LocalTime.of(9, 0), LocalTime.of(10, 0)));
+        classDateRepository.save(new ClassDate(pilatesClass, LocalDate.of(2024, 11, 15), LocalTime.of(9, 0), LocalTime.of(10, 0)));
+        classDateRepository.save(new ClassDate(pilatesClass, LocalDate.of(2024, 11, 16), LocalTime.of(9, 0), LocalTime.of(10, 0)));
         classDateRepository.save(new ClassDate(pilatesClass, LocalDate.of(2024, 11, 17), LocalTime.of(9, 0), LocalTime.of(10, 0)));
 
-        ClassDate spinDate = classDateRepository.save(new ClassDate(spinClass, LocalDate.of(2024, 11, 15), LocalTime.of(10, 0), LocalTime.of(11, 0)));
-        ClassDate spinDate2 = classDateRepository.save(new ClassDate(spinClass, LocalDate.of(2024, 11, 16), LocalTime.of(10, 0), LocalTime.of(11, 0)));
+        classDateRepository.save(new ClassDate(spinClass, LocalDate.of(2024, 11, 15), LocalTime.of(10, 0), LocalTime.of(11, 0)));
+        classDateRepository.save(new ClassDate(spinClass, LocalDate.of(2024, 11, 16), LocalTime.of(10, 0), LocalTime.of(11, 0)));
         classDateRepository.save(new ClassDate(spinClass, LocalDate.of(2024, 11, 17), LocalTime.of(10, 0), LocalTime.of(11, 0)));
 
         List<ClassDate> dates =classDateRepository.findAll();
         List<User> memebersList = userService.findMembers();
         Set<User> usersSet = new HashSet<>(memebersList);
 
-        Attendance attendance1 = new Attendance(yogaDate, usersSet);
-        Attendance attendance2 = new Attendance(pilatesDate, usersSet);
-        Attendance attendance3 = new Attendance(spinDate, usersSet);
-
-        Attendance attendance4 = new Attendance(yogaDate2, usersSet);
-        Attendance attendance5 = new Attendance(pilatesDate2, usersSet);
-        Attendance attendance6 = new Attendance(spinDate2, usersSet);
+        Attendance attendance1 = new Attendance(dates.getFirst(), usersSet);
+        Attendance attendance2 = new Attendance(dates.get(1), usersSet);
+        Attendance attendance3 = new Attendance(dates.get(2), usersSet);
 
         attendanceRepository.save(attendance1);
         attendanceRepository.save(attendance2);
         attendanceRepository.save(attendance3);
-        attendanceRepository.save(attendance4);
-        attendanceRepository.save(attendance5);
-        attendanceRepository.save(attendance6);
 
-        Shift shift1 = new Shift(yogaClass, userService.findTrainers().getFirst(), dates.getFirst());
-        Shift shift2 = new Shift(pilatesClass, userService.findTrainers().getLast(), dates.getLast());
-        Shift shift3 = new Shift(spinClass, userService.findTrainers().getLast(), dates.get(1));
+        Shift shift1 = new Shift(yogaClass, userService.findTrainers().getFirst(), dates.getFirst(), true);
+        Shift shift2 = new Shift(pilatesClass, userService.findTrainers().getLast(), dates.get(1), true);
+        Shift shift3 = new Shift(spinClass, userService.findTrainers().getLast(), dates.get(2), true);
+        Shift shift4 = new Shift(spinClass, userService.findTrainers().getLast(), dates.get(3));
+        Shift shift5 = new Shift(spinClass, userService.findTrainers().getLast(), dates.get(4));
+        Shift shift6 = new Shift(spinClass, userService.findTrainers().getLast(), dates.get(5));
 
         shiftRepository.save(shift1);
         shiftRepository.save(shift2);
         shiftRepository.save(shift3);
+        shiftRepository.save(shift4);
+        shiftRepository.save(shift5);
+        shiftRepository.save(shift6);
     }
-
-
-
 }

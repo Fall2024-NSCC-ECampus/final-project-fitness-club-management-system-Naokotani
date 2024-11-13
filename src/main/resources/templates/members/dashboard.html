@@ -12,18 +12,13 @@
             integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
             crossorigin="anonymous"></script>
 </head>
-<body>
+<body >
 <div th:replace="fragments/navbar :: navbar"></div>
 <main class="d-flex justify-content-center align-items-center min-vh-100 bg-light">
 <div class="text-center p-5 border rounded shadow-sm bg-white">
-    <h1 class="display-4 mb-4">Admin Dashboard</h1>
+    <h1 class="display-4 mb-4">Trainer Dashboard</h1>
     <div class="d-grid gap-3">
-        <a th:href="@{/admin/user/create}" class="btn btn-success btn-lg">Register User</a>
-        <a th:href="@{/admin/users}" class="btn btn-info btn-lg">List Users</a>
-        <a th:href="@{/admin/users/members}" class="btn btn-success btn-lg">List Members</a>
-        <a th:href="@{/admin/users/trainers}" class="btn btn-info btn-lg">List Trainers</a>
-        <a th:href="@{/admin/classes}" class="btn btn-success btn-lg">List Classes</a>
-        <a th:href="@{/admin/class/create}" class="btn btn-info btn-lg">Create Class</a>
+        <a th:href="@{/member/classes}" class="btn btn-info btn-lg">View Classes</a>
     </div>
 </div>
 </main>

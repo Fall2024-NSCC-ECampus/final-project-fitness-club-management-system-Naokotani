@@ -3,6 +3,7 @@ package com.example.fitnessclub.service;
 import com.example.fitnessclub.exceptions.ClassDetailsNotFound;
 import com.example.fitnessclub.exceptions.ShiftNotFound;
 import com.example.fitnessclub.exceptions.TrainerNotFound;
+import com.example.fitnessclub.model.ClassDate;
 import com.example.fitnessclub.model.ClassDetails;
 import com.example.fitnessclub.model.Shift;
 import com.example.fitnessclub.repository.ShiftRepository;
@@ -68,6 +69,13 @@ public class ShiftServiceImpl implements ShiftService {
     @Override
     public List<Shift> findClassDateByTrainerId(Long id) {
         return shiftRepository.findShiftByTrainerId(id);
+    }
+
+    @Override
+    public Shift updateShift(ClassDate classDate) {
+        Shift shift = shiftRepository.findShiftByClassDate(classDate);
+        shift.setAttendance(true);
+        return shiftRepository.save(shift);
     }
 
     // TODO fix this!

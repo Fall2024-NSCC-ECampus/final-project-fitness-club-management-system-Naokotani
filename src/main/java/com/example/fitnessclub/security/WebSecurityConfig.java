@@ -25,9 +25,10 @@ public class WebSecurityConfig implements UserDetailsService {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/", "/register", "/error", "/admin/**", "/trainer/**").permitAll()
-//                        .requestMatchers("/admin/**", "/admin/*")
-//                        .hasRole("ADMIN")
+                        .requestMatchers("/","/error").permitAll()
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/trainer/**").hasRole("TRAINER")
+                        .requestMatchers("/member/**").hasRole("MEMBER")
                         .anyRequest().authenticated()
                 )
                 .formLogin((form) -> form
@@ -35,8 +36,9 @@ public class WebSecurityConfig implements UserDetailsService {
                         .usernameParameter("email")
                         .permitAll()
                 )
-                .logout(LogoutConfigurer::permitAll);
-
+                .logout((logout )-> logout
+                        .logoutUrl("/logout").logoutSuccessUrl("/")
+                );
         return http.build();
     }
 
@@ -50,4 +52,3 @@ public class WebSecurityConfig implements UserDetailsService {
                 userRepository);
     }
 }
-

@@ -59,7 +59,7 @@ public class ClassController {
                     e.getMessage());
             return "admin/class/classForm";
         }
-        return "welcome";
+        return "redirect:classes";
     }
 
     @GetMapping("class/create")

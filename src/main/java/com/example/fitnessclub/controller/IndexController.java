@@ -26,22 +26,23 @@ public class IndexController {
     public String index(@AuthenticationPrincipal UserDetails userDetails) {
         User user;
         Set<Role> roles = new HashSet<>();
-        if(userDetails != null) {
-          user = userService.findUserByEmail(userDetails.getUsername());
-          roles = user.getRoles();
+        if (userDetails != null) {
+            user = userService.findUserByEmail(userDetails.getUsername());
+            roles = user.getRoles();
         }
 
         boolean isMember = roles.stream().anyMatch(r -> r.getRole().equals(UserRoles.MEMBER));
         boolean isAdmin = roles.stream().anyMatch(r -> r.getRole().equals(UserRoles.ADMIN));
         boolean isTrainer = roles.stream().anyMatch(r -> r.getRole().equals(UserRoles.TRAINER));
 
-        if(isAdmin) {
+        if (isAdmin) {
             return "admin/dashboard";
-        } else if(isMember) {
-            return "members/classList";
-        } else if(isTrainer) {
+        } else if (isTrainer) {
             return "trainer/dashboard";
+        } else if (isMember) {
+            return "members/dashboard";
         }
+
         return "index";
     }
 }

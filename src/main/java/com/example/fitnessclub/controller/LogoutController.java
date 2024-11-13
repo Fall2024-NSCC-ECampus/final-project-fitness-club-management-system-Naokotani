@@ -1,15 +1,14 @@
-package com.example.fitnessclub.controller.dashboard;
+package com.example.fitnessclub.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/admin/dashboard")
-public class AdminDashboardController {
-
+@RequestMapping("/logout")
+public class LogoutController {
     @GetMapping
-    public String adminDashboard() {
-        return "admin/dashboard";
+    public String logoutPage() {
+        return "index";
     }
 }

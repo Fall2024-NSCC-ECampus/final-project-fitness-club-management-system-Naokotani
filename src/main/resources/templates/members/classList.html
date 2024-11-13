@@ -12,6 +12,7 @@
           crossorigin="anonymous"></script>
 </head>
 <body>
+<div th:replace="fragments/navbar :: navbar"></div>
 <table class="table table-striped">
   <h2 th:if="${classes.isEmpty()}">No classes</h2>
   <thead>
@@ -31,5 +32,6 @@
   </tr>
   </tbody>
 </table>
+<div th:replace="fragments/footer :: footer"></div>
 </body>
 </html>

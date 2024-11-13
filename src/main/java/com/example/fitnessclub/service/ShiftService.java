@@ -1,6 +1,7 @@
 package com.example.fitnessclub.service;
 
 import com.example.fitnessclub.exceptions.ShiftNotFound;
+import com.example.fitnessclub.model.ClassDate;
 import com.example.fitnessclub.model.ClassDetails;
 import com.example.fitnessclub.model.Shift;
 
@@ -16,4 +17,5 @@ public interface ShiftService {
     void deleteShift(Long id);
     List<Shift> findShiftsByTrainerId(Long trainerId);
     List<Shift> findClassDateByTrainerId(Long id);
+    Shift updateShift(ClassDate classDate);
 }

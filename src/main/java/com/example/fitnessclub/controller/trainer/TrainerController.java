@@ -1,5 +1,6 @@
 package com.example.fitnessclub.controller.trainer;
 
+import com.example.fitnessclub.model.Shift;
 import com.example.fitnessclub.model.User;
 import com.example.fitnessclub.service.*;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -37,17 +38,17 @@ public class TrainerController {
 
     @GetMapping("shifts")
     public String trainerShifts(@AuthenticationPrincipal UserDetails userDetails, Model model){
-        if(userDetails == null) return "redirect:/login";
         User user = userService.findUserByEmail(userDetails.getUsername());
-        model.addAttribute("shifts", shiftService.findClassDateByTrainerId(user.getId()));
-        return "trainer/classes";
+        List<Shift> shifts = shiftService.findShiftsByTrainerId(user.getId());
+        model.addAttribute("shifts", shifts);
+        return "trainer/shifts";
     }
 
     @PostMapping("attendance/create/{id}")
     public String submitSelectedUsers(@RequestParam List<Long> selectedUsers,
                                       @PathVariable Long id) {
         attendanceService.createAttendance(selectedUsers, id);
-        return "redirect:/trainer/classes/";
+        return "redirect:../../shifts";
     }
 
     @GetMapping("/classes")
