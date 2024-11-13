@@ -44,7 +44,7 @@ public class ClassController {
         model.addAttribute("class",
                 classRequest);
         if(bindingResult.hasErrors()) {
-            return "classForm";
+            return "admin/class/classForm";
         }
         try {
             classService.createClass(classRequest);
@@ -52,12 +52,12 @@ public class ClassController {
             model.addAttribute(
                     "trainerNotFound",
                     e.getMessage());
-            return "classForm";
+            return "admin/class/classForm";
         } catch (ClassDetailsNotFound e) {
             model.addAttribute(
                     "classDetailsNotFound",
                     e.getMessage());
-            return "classForm";
+            return "admin/class/classForm";
         }
         return "welcome";
     }
@@ -65,28 +65,28 @@ public class ClassController {
     @GetMapping("class/create")
     public String createClassForm(Model model) {
         model.addAttribute("class", new ClassRequest());
-        return "classForm";
+        return "admin/class/classForm";
     }
 
     @GetMapping("class/date/create/{id}")
     public String createClassDateForm(@PathVariable Long id, Model model) {
         model.addAttribute("classDateRequest", new ClassDateRequest());
         model.addAttribute("class", classService.findClassDetails(id));
-        return "classDateForm";
+        return "admin/class/classDateForm";
     }
 
     //TODO validation
     @PostMapping("class/date/create/{id}")
     public String createClassDate(@Valid ClassDateRequest classDate, @PathVariable Long id, Model model) {
         classService.createClassDate(classDate, id);
-        return "welcome";
+        return "redirect:/admin/classes";
     }
 
     //TODO what is this?
     @GetMapping("classes")
     public String listClasses(Model model) {
         model.addAttribute("classes", classService.findAll());
-        return "classList";
+        return "admin/class/classList";
     }
 
     //TODO Update methods

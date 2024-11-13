@@ -9,5 +9,5 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface AttendanceRepository extends JpaRepository<Attendance, Long> {
-    void deleteByMemberId(Long memberId);
+    void deleteByMembersId(Long memberId);
 }

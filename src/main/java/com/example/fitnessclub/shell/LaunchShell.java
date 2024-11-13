@@ -67,6 +67,16 @@ public class LaunchShell {
         return "Data seed successfully";
     }
 
+    @ShellMethod("Delete the database")
+    public String deleteDatabase() {
+        attendanceRepository.deleteAll();
+        shiftRepository.deleteAll();
+        classDateRepository.deleteAll();
+        classRepository.deleteAll();
+        userRepository.deleteAll();
+        return "Database deleted";
+    }
+
     @ShellMethod("Register new Admin" )
     public void registerAdmin(
             @ShellOption(value={"--first-name", "-f"})

@@ -52,19 +52,19 @@ public class UserController {
     public String createUser(@Valid UserRequest userRequest,
                              BindingResult bindingResult, Model model) {
         if(bindingResult.hasErrors()) {
-            return "register";
+            return "admin/user/register";
         }
         try {
             userRegistrationService.registerUser(userRequest);
-            return "welcome";
+            return "redirect:/admin/user/list";
         } catch (EmptyRoleSet e) {
             model.addAttribute("user", userRequest);
             model.addAttribute("emptyRoleSet", e.getMessage());
-            return "register";
+            return "admin/user/register";
         } catch (UserExists e) {
             model.addAttribute("userExists", e.getMessage());
             model.addAttribute("user", userRequest);
-            return "register";
+            return "admin/user/register";
         }
     }
 
@@ -76,7 +76,7 @@ public class UserController {
     @GetMapping("user/create")
     public String createUserForm(Model model) {
         model.addAttribute("user", new UserRequest());
-        return "register";
+        return "admin/user/register";
     }
 
     /*
@@ -93,7 +93,7 @@ public class UserController {
         model.addAttribute("user", new User());
         model.addAttribute("users", userService.findUsers());
         userService.findUsers().forEach(user -> log.info("User id: {}", user.getId()));
-        return "users";
+        return "admin/user/users";
     }
 
     /**
@@ -105,7 +105,7 @@ public class UserController {
     public String listTrainers(Model model) {
         model.addAttribute("classes", classService.findAll());
         model.addAttribute("users", userService.findTrainers());
-        return "trainers";
+        return "admin/user/trainers";
     }
 
     /**
@@ -116,7 +116,7 @@ public class UserController {
     @GetMapping("users/members")
     public String listMembers(Model model) {
         model.addAttribute("users", userService.findMembers());
-        return "users";
+        return "admin/user/users";
     }
 
     /**
@@ -130,7 +130,7 @@ public class UserController {
         List<User> users = new ArrayList<>();
         users.add(userService.findUserById(id));
         model.addAttribute("users", users);
-        return "users";
+        return "admin/user/users";
     }
 
     /*
@@ -147,7 +147,7 @@ public class UserController {
     public String updateUserForm(@PathVariable Long id, Model model) {
         model.addAttribute("id", id);
         model.addAttribute("user", userService.findUserRequestById(id));
-        return "updateUserForm";
+        return "admin/user/updateUserForm";
     }
 
     /**
@@ -166,10 +166,10 @@ public class UserController {
         model.addAttribute("user",
                 userRequest);
         if(bindingResult.hasErrors()) {
-            return "updateUserForm";
+            return "admin/user/updateUserForm";
         }
         userService.updateMember(userRequest, id);
-        return "welcome";
+        return "redirect:/admin/users";
     }
 
     /*

@@ -60,7 +60,7 @@ public class UserServiceImpl implements UserService {
         roles.stream().filter(role -> role.getRole() == UserRoles.TRAINER)
                 .forEach(role -> shiftRepository.deleteByTrainerId(user.getId()));
         roles.stream().filter(role -> role.getRole() == UserRoles.MEMBER)
-                .forEach(role -> attendanceRepository.deleteByMemberId(user.getId()));
+                .forEach(role -> attendanceRepository.deleteByMembersId(user.getId()));
         userRepository.deleteById(id);
     }
 

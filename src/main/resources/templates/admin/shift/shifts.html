@@ -5,29 +5,38 @@
   <title>Title</title>
 </head>
 <body>
+<div th:replace="fragments/navbar :: navbar"></div>
 <table class="table table-striped">
-  <h2 th:if="${shifts.isEmpty()}">No classes</h2>
+  <h2 th:if="${shifts.isEmpty()}">No shifts Found for Trainer</h2>
   <thead>
   <tr>
     <th>Class Name</th>
+    <th>Trainer Name</th>
     <th>Date</th>
-    <th>Start Time</th>
+    <th>State Time</th>
     <th>End Time</th>
   </tr>
   </thead>
   <tbody>
   <tr th:each="shift : ${shifts}">
     <td th:text="${shift.getClassDetails().getName()}" class="text-left"></td>
+    <td th:text="${shift.getTrainer().getName()}" class="text-left"></td>
     <td th:text="${shift.getClassDate().getDate()}" class="text-left"></td>
     <td th:text="${shift.getClassDate().getStartTime()}" class="text-left"></td>
     <td th:text="${shift.getClassDate().getEndTime()}" class="text-left"></td>
     <td>
-      <form th:action="@{/trainer/attendance/create/{id}(id=${shift.getClassDate().getId()})}" method="get">
-        <button type="submit" class="btn btn-primary mb-3">Do Attendance</button>
+      <form th:action="@{/admin/shift/update/{id}(id=${shift.id})}" method="post">
+        <button type="submit" class="btn btn-primary mb-3">Update</button>
+      </form>
+    </td>
+    <td>
+      <form th:action="@{/admin/shift/delete/{id}(id=${shift.id})}" method="post">
+        <button type="submit" class="btn btn-primary mb-3">Delete</button>
       </form>
     </td>
   </tr>
   </tbody>
 </table>
+<div th:replace="fragments/navbar :: footer"></div>
 </body>
 </html>

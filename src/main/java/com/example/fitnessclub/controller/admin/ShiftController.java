@@ -36,7 +36,7 @@ public class ShiftController {
                               @RequestParam("classId") Long classId,
                               @RequestParam("dateId") Long dateId) {
         shiftService.createShift(trainerId, classId, dateId);
-        return "welcome";
+        return "redirect:/admin/dashboard/";
     }
 
     /**
@@ -48,7 +48,7 @@ public class ShiftController {
     public String createShiftForm(@PathVariable Long id, @RequestParam Long classId, Model model) {
         model.addAttribute("dates", classService.findClassDatesById(classId));
         model.addAttribute("trainer", id);
-        return "shiftForm";
+        return "admin/shift/shiftForm";
     }
 
     /*
@@ -63,7 +63,7 @@ public class ShiftController {
     @GetMapping("shifts/trainer/{id}")
     public String listShifts(@PathVariable Long id, Model model) {
         model.addAttribute("shifts", shiftService.findShiftsByTrainerId(id));
-        return "shifts";
+        return "admin/shift/shifts";
     }
 
     /**
@@ -75,7 +75,7 @@ public class ShiftController {
     public String listShiftsById(@PathVariable Long id, Model model) {
         List<Shift> shifts = shiftService.findByTrainerId(id);
         model.addAttribute("shifts", shifts);
-        return "shifts";
+        return "admin/shift/shifts";
     }
 
     /*

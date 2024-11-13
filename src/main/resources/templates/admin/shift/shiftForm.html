@@ -12,6 +12,7 @@
           crossorigin="anonymous"></script>
 </head>
 <body>
+<div th:replace="fragments/navbar :: navbar"></div>
 <div class="container">
   <table class="table table-striped">
     <thead>
@@ -35,4 +36,6 @@
     </tbody>
   </table>
 </div>
+<div th:replace="fragments/navbar :: footer"></div>
 </body>
+</html>
