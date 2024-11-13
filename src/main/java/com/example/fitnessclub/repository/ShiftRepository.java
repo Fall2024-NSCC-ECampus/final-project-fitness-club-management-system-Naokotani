@@ -11,7 +11,5 @@ public interface ShiftRepository extends JpaRepository<Shift, Long> {
     List<Shift> findByTrainerId(Long trainerId);
     void deleteByTrainerId(Long trainerId);
     Shift findShiftByClassDate(ClassDate classDate);
-    //TODO use @Param
-    @Query("SELECT s FROM Shift s WHERE s.trainer.id = ?1")
-    List<Shift> findShiftByTrainerId(Long id);
+    List<Shift> findShiftByTrainerId(Long trainerId);
 }

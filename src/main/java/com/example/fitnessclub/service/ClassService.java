@@ -12,6 +12,7 @@ public interface ClassService {
     void createClass(ClassRequest classRequest);
     void updateClassName(String newName, long id);
     void deleteClass(long id);
+    List<ClassDate>findClassDateByDateDesc();
     ClassDetails findClassDetails(Long id) throws ClassDetailsNotFound;
     List<ClassDetails> findAll();
     //TODO what id?

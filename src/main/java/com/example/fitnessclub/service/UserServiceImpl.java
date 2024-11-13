@@ -28,11 +28,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserRequest findUserRequestById(Long id) throws UserNotFound {
-        return new UserRequest(findUserById(id));
-    }
-
-    @Override
     public List<User> findUsers() {
         return userRepository.findAll();
     }

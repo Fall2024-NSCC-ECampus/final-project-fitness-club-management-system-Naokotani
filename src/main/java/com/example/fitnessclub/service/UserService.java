@@ -11,7 +11,6 @@ public interface UserService {
     void updateMember(UserRequest user, long id);
     List<User> findUsers();
     User findUserById(Long id) throws UserNotFound;
-    UserRequest findUserRequestById(Long id) throws UserNotFound;
     List<User> findMembers();
     List<User> findTrainers();
     User findUserByEmail(String email);

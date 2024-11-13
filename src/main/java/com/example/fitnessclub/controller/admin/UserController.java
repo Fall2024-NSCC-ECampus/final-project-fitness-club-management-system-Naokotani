@@ -56,7 +56,7 @@ public class UserController {
         }
         try {
             userRegistrationService.registerUser(userRequest);
-            return "redirect:/admin/user/list";
+            return "redirect:../users";
         } catch (EmptyRoleSet e) {
             model.addAttribute("user", userRequest);
             model.addAttribute("emptyRoleSet", e.getMessage());
@@ -146,7 +146,7 @@ public class UserController {
     @GetMapping("user/update/{id}")
     public String updateUserForm(@PathVariable Long id, Model model) {
         model.addAttribute("id", id);
-        model.addAttribute("user", userService.findUserRequestById(id));
+        model.addAttribute("user", userService.findUserById(id));
         return "admin/user/updateUserForm";
     }
 

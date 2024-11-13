@@ -8,9 +8,11 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface ClassDateRepository extends JpaRepository<ClassDate, Long> {
-    @Query("SELECT d FROM ClassDate d WHERE d.classDetails.id = ?1")
-    List<ClassDate> findDateByClassId(Long classId);
+    List<ClassDate> findAllByClassDetailsId(Long classId);
 
     @Query("SELECT d.classDetails FROM ClassDate d WHERE d.classDetails.id = ?1")
     ClassDetails findClassDetailsByDateId(Long classId);
+
+    @Query("FROM ClassDate date ORDER BY date.date, date.startTime")
+    List<ClassDate> findClassDetailsByDateDesc();
 }

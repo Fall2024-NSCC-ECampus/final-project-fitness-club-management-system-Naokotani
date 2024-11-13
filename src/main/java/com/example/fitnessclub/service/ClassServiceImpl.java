@@ -22,6 +22,11 @@ public class ClassServiceImpl implements ClassService {
     }
 
     @Override
+    public List<ClassDate> findClassDateByDateDesc() {
+        return classDateRepository.findClassDetailsByDateDesc();
+    }
+
+    @Override
     public List<ClassDetails> findAll() {
         return classRepository.findAll();
     }
@@ -59,7 +64,7 @@ public class ClassServiceImpl implements ClassService {
 
     @Override
     public List<ClassDate> findClassDatesById(Long classId) {
-        return classDateRepository.findDateByClassId(classId);
+        return classDateRepository.findAllByClassDetailsId(classId);
     }
 
     //TODO handle error better
