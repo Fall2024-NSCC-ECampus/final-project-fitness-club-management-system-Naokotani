@@ -81,6 +81,12 @@ public class ShiftController {
     /*
      * Destroy
      */
+
+    /**
+     * Deletes a shift
+     * @param id of the shift to be deleted.
+     * @return shifts.html
+     */
     @PostMapping("shift/delete/{id}")
     public String deleteShift(@PathVariable Long id) {
         shiftService.deleteShift(id);

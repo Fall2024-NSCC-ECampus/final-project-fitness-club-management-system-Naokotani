@@ -7,6 +7,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/logout")
 public class LogoutController {
+    /**
+     * Directs logged ou traffic.
+     * @return index.html
+     */
     @GetMapping
     public String logoutPage() {
         return "index";

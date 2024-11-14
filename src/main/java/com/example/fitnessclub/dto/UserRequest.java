@@ -35,10 +35,4 @@ public class UserRequest {
     private String password;
 
     private Set<@NotBlank(message="Role must not be empty") String> roles;
-
-//    public UserRequest(User user) {
-//        this.firstName = user.getFirstName();
-//        this.lastName = user.getLastName();
-//        this.email = user.getEmail();
-//    }
 }

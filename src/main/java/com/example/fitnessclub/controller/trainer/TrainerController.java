@@ -29,6 +29,12 @@ public class TrainerController {
         this.classService = classService;
     }
 
+    /**
+     * Creates a new attendance record.
+     * @param id of the {@link com.example.fitnessclub.model.ClassDate} to do attendance for.
+     * @param model for the view
+     * @return attendance.html
+     */
     @GetMapping("attendance/create/{id}")
     public String createAttendanceForm(@PathVariable Long id, Model model){
         model.addAttribute("classDateId", id);
@@ -36,6 +42,25 @@ public class TrainerController {
         return "trainer/attendance";
     }
 
+    /**
+     * Creates a new attendance record
+     * @param selectedUsers a list of {@link User} to add to the attendance record
+     * @param id of the trainer for the attendance record
+     * @return shifts.html
+     */
+    @PostMapping("attendance/create/{id}")
+    public String submitSelectedUsers(@RequestParam List<Long> selectedUsers,
+                                      @PathVariable Long id) {
+        attendanceService.createAttendance(selectedUsers, id);
+        return "redirect:../../shifts";
+    }
+
+    /**
+     * Gets the shifts for a trainer.
+     * @param userDetails User details of the logged in trainer to get shifts for
+     * @param model for the view
+     * @return shifts.html
+     */
     @GetMapping("shifts")
     public String trainerShifts(@AuthenticationPrincipal UserDetails userDetails, Model model){
         User user = userService.findUserByEmail(userDetails.getUsername());
@@ -44,13 +69,12 @@ public class TrainerController {
         return "trainer/shifts";
     }
 
-    @PostMapping("attendance/create/{id}")
-    public String submitSelectedUsers(@RequestParam List<Long> selectedUsers,
-                                      @PathVariable Long id) {
-        attendanceService.createAttendance(selectedUsers, id);
-        return "redirect:../../shifts";
-    }
 
+    /**
+     * Gets a list of all class dates.
+     * @param model for the view
+     * @return classList.html
+     */
     @GetMapping("/classes")
     public String trainerClasses(Model model) {
         model.addAttribute("classes", classService.findClassDates());

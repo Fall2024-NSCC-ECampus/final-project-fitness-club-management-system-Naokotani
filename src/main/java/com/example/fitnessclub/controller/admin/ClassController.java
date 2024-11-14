@@ -62,27 +62,49 @@ public class ClassController {
         return "redirect:classes";
     }
 
+    /**
+     * Get the form to create a new {@link ClassDetails}
+     * @param model for the view.
+     * @return classForm.html
+     */
     @GetMapping("class/create")
     public String createClassForm(Model model) {
         model.addAttribute("class", new ClassRequest());
         return "admin/class/classForm";
     }
 
+    /**
+     * Get the form to create a new {@link com.example.fitnessclub.model.ClassDate}
+     * @param id of the {@link ClassDetails} to add a date to.
+     * @param model view
+     * @return classDateForm.html
+     */
     @GetMapping("class/date/create/{id}")
     public String createClassDateForm(@PathVariable Long id, Model model) {
         model.addAttribute("classDateRequest", new ClassDateRequest());
-        model.addAttribute("class", classService.findClassDetails(id));
+        model.addAttribute("class", classService.findClassDetailsById(id));
         return "admin/class/classDateForm";
     }
 
     //TODO validation
+    /**
+     * Creates a new class date
+     * @param classDate Class rate from request
+     * @param id id of the class {@link ClassDetails} record to add to.
+     * @param model view for model
+     * @return classes.html
+     */
     @PostMapping("class/date/create/{id}")
     public String createClassDate(@Valid ClassDateRequest classDate, @PathVariable Long id, Model model) {
         classService.createClassDate(classDate, id);
         return "redirect:/admin/classes";
     }
 
-    //TODO what is this?
+    /**
+     * Gets a list of all Classes
+     * @param model view model
+     * @return classList.html
+     */
     @GetMapping("classes")
     public String listClasses(Model model) {
         model.addAttribute("classes", classService.findAll());

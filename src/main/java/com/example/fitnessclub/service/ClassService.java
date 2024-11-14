@@ -13,7 +13,7 @@ public interface ClassService {
     void updateClassName(String newName, long id);
     void deleteClass(long id);
     List<ClassDate>findClassDateByDateDesc();
-    ClassDetails findClassDetails(Long id) throws ClassDetailsNotFound;
+    ClassDetails findClassDetailsById(Long id) throws ClassDetailsNotFound;
     List<ClassDetails> findAll();
     //TODO what id?
     List<ClassDate> findClassDatesById(Long id);

@@ -22,6 +22,11 @@ public class IndexController {
         this.userService = userService;
     }
 
+    /**
+     * Directs traffic based on roles of the current session
+     * @param userDetails the user details of the currently logged in member
+     * @return either index.html or a role dashboard.html
+     */
     @GetMapping
     public String index(@AuthenticationPrincipal UserDetails userDetails) {
         User user;

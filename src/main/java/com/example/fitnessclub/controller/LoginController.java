@@ -7,6 +7,10 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/login")
 public class LoginController {
 
+    /**
+     * Creates a login path used by Spring Security
+     * @return login.html
+     */
     @GetMapping
     public String login() {
         return "login";

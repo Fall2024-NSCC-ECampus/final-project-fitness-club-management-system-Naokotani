@@ -28,6 +28,13 @@ public class AttendanceServiceImpl implements AttendanceService {
     }
 
     //TODO improve error handling of unfound IDs
+
+    /**
+     * Creates an attendance record
+     * @param memberIds The {@link User} to be added to the attendance record
+     * @param classDateId The {@link ClassDate} to be added to the attendance record.
+     * @return The saved attendance record.
+     */
     @Override
     public Attendance createAttendance(List<Long> memberIds, Long classDateId) {
         Set<User> members = memberIds.stream().map(userService::findUserById).collect(Collectors.toSet());
