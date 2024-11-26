@@ -95,8 +95,6 @@ public class ClassServiceImpl implements ClassService {
         return classDateRepository.findAll();
     }
 
-    //TODO handle error better
-
     /**
      * Create a new {@link ClassDate}
      * @param classDate The new classDate.
@@ -105,7 +103,8 @@ public class ClassServiceImpl implements ClassService {
     @Override
     public void createClassDate(ClassDateRequest classDate, Long id) {
         classDateRepository.save(new ClassDate(
-                classRepository.findById(id).orElseThrow(),
+                classRepository.findById(id)
+                        .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND)),
                 classDate.getDate(),
                 classDate.getStartTime(),
                 classDate.getEndTime()

@@ -6,7 +6,9 @@ import com.example.fitnessclub.model.Shift;
 import com.example.fitnessclub.model.User;
 import com.example.fitnessclub.repository.AttendanceRepository;
 import com.example.fitnessclub.repository.ShiftRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Set;
@@ -27,8 +29,6 @@ public class AttendanceServiceImpl implements AttendanceService {
         this.shiftService = shiftService;
     }
 
-    //TODO improve error handling of unfound IDs
-
     /**
      * Creates an attendance record
      * @param memberIds The {@link User} to be added to the attendance record
@@ -39,6 +39,7 @@ public class AttendanceServiceImpl implements AttendanceService {
     public Attendance createAttendance(List<Long> memberIds, Long classDateId) {
         Set<User> members = memberIds.stream().map(userService::findUserById).collect(Collectors.toSet());
         ClassDate classDate = classService.findClassDateById(classDateId);
+        if(classDate == null) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         Attendance attendance = attendanceRepository.save(new Attendance(classDate, members));
         return attendanceRepository.save(attendance);
     }
