@@ -40,7 +40,7 @@ public class AttendanceServiceImpl implements AttendanceService {
         Set<User> members = memberIds.stream().map(userService::findUserById).collect(Collectors.toSet());
         ClassDate classDate = classService.findClassDateById(classDateId);
         Attendance attendance = attendanceRepository.save(new Attendance(classDate, members));
-        Shift shift = shiftService.updateShift(classDate);
+        //Shift shift = shiftService.updateShift(classDate);
         return attendanceRepository.save(attendance);
     }
 }

@@ -7,7 +7,9 @@ import com.example.fitnessclub.repository.ClassDateRepository;
 import com.example.fitnessclub.repository.ClassRepository;
 import com.example.fitnessclub.dto.ClassDateRequest;
 import com.example.fitnessclub.dto.ClassRequest;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -40,15 +42,6 @@ public class ClassServiceImpl implements ClassService {
     }
 
     /**
-     * Deletes a {@link ClassDetails} by ID.
-     * @param id The id of the class to be deleted.
-     */
-    @Override
-    public void deleteClass(long id) {
-        classRepository.deleteById(id);
-    }
-
-    /**
      * Creates a new {@link ClassDetails} record.
      * @param classRequest Request for a new class
      */
@@ -61,33 +54,8 @@ public class ClassServiceImpl implements ClassService {
         classRepository.save(classDetails);
     }
 
-    //TODO error handling
-
     /**
-     * Updates the name of a {@link ClassDetails} and saves it to the database.
-     * @param newName The new name for the class record
-     * @param id of the class to be updated.
-     * @throws ClassDetailsNotFound if the class to be updated is now found.
-     */
-    @Override
-    public void updateClassName(String newName, long id) throws ClassDetailsNotFound {
-        ClassDetails oldClass = findClassDetailsById(id);
-        classRepository.save(setClassName(oldClass, newName));
-    }
-
-    /**
-     * Set a new name on a {@link ClassDetails} instance.
-     * @param oldClass The class to be updated.
-     * @param newName The new name for the class.
-     * @return returns the updated class.
-     */
-    private ClassDetails setClassName(ClassDetails oldClass, String newName) {
-        oldClass.setName(newName);
-        return oldClass;
-    }
-
-    /**
-     * Finds a {@link ClassDetails} by Id.
+     * Finds a {@link ClassDetails} by id.
      * @param id of the class to be found.
      * @return Returns the class
      * @throws ClassDetailsNotFound if the class is not found.
@@ -97,19 +65,6 @@ public class ClassServiceImpl implements ClassService {
         return classRepository.findById(id).orElseThrow(() ->new ClassDetailsNotFound(id));
     }
 
-
-    /**
-     * Find all {@link ClassDate} for a specific {@link ClassDetails} by ID.
-     * @param classId The ID of the date to find.
-     * @return The found class date.
-     */
-    @Override
-    public List<ClassDate> findClassDatesById(Long classId) {
-        return classDateRepository.findAllByClassDetailsId(classId);
-    }
-
-    //TODO handle error better
-
     /**
      * Find a specific {@link ClassDate} by ID.
      * @param id of the class date to be found
@@ -117,7 +72,8 @@ public class ClassServiceImpl implements ClassService {
      */
     @Override
     public ClassDate findClassDateById(Long id) {
-        return classDateRepository.findById(id).orElseThrow();
+        return classDateRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
     /**

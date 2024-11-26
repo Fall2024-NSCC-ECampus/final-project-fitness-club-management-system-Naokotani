@@ -18,16 +18,14 @@ public class ShiftServiceImpl implements ShiftService {
     private final ShiftRepository shiftRepository;
     private final UserService userService;
     private final ClassService classService;
-    private final ClassRepository classRepository;
-    private final ClassDateRepository classDateRepository;
+        private final ClassDateRepository classDateRepository;
 
     public ShiftServiceImpl(ShiftRepository shiftRepository,
                             ClassServiceImpl classServiceImpl,
-                            UserServiceImpl userService, ClassRepository classRepository, ClassDateRepository classDateRepository) {
+                            UserServiceImpl userService, ClassDateRepository classDateRepository) {
         this.shiftRepository = shiftRepository;
         this.userService = userService;
         this.classService = classServiceImpl;
-        this.classRepository = classRepository;
         this.classDateRepository = classDateRepository;
     }
 
@@ -63,18 +61,8 @@ public class ShiftServiceImpl implements ShiftService {
     }
 
     @Override
-    public Shift findShift(long id) throws ShiftNotFound {
-        return shiftRepository.findById(id).orElseThrow(() -> new ShiftNotFound(id));
-    }
-
-    @Override
     public List<Shift> findShiftsByTrainerId(Long trainerId) {
         return shiftRepository.findByTrainerId(trainerId);
-    }
-
-    @Override
-    public List<Shift> findClassDateByTrainerId(Long id) {
-        return shiftRepository.findShiftByTrainerId(id);
     }
 
     @Override
@@ -88,19 +76,4 @@ public class ShiftServiceImpl implements ShiftService {
     public List<ClassDate> findAvailableShifts(Long classId) {
         return classDateRepository.findAvailableShfifts(classId);
     }
-
-    // TODO fix this!
-    @Override
-    public void updateShift(Shift newShift, long id) throws ShiftNotFound {
-//        Shift oldShift = findShift(id);
-//        shiftRepository.save(setShift(oldShift, newShift));
-    }
-
-//    private Shift setShift(Shift oldShift, Shift newShift) {
-//        oldShift.setDate(newShift.getDate());
-//        oldShift.setStartTime(newShift.getStartTime());
-//        oldShift.setEndTime(newShift.getEndTime());
-//        oldShift.setTrainer(newShift.getTrainer());
-//        return oldShift;
-//    }
 }

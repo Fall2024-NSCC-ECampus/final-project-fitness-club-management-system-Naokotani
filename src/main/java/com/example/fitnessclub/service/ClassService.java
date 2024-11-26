@@ -10,13 +10,9 @@ import java.util.List;
 
 public interface ClassService {
     void createClass(ClassRequest classRequest);
-    void updateClassName(String newName, long id);
-    void deleteClass(long id);
     List<ClassDate>findClassDateByDateDesc();
     ClassDetails findClassDetailsById(Long id) throws ClassDetailsNotFound;
     List<ClassDetails> findAll();
-    //TODO what id?
-    List<ClassDate> findClassDatesById(Long id);
     List<ClassDate> findClassDates();
     ClassDate findClassDateById(Long id);
     ClassDetails findClassDetailsByDateId(Long id);

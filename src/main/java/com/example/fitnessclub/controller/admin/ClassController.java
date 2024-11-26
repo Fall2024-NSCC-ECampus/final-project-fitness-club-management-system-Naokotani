@@ -110,7 +110,4 @@ public class ClassController {
         model.addAttribute("classes", classService.findAll());
         return "admin/class/classList";
     }
-
-    //TODO Update methods
-    //TODO Destroy methods
 }
