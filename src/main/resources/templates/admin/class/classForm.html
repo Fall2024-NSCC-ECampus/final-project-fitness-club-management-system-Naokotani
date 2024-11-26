@@ -20,34 +20,9 @@
       <label for="className" class="form-label">Class Name:</label>
       <input type="text" id="className" class="form-control" th:field="${class.name}" required />
     </div>
-    <div id="scheduleEntries">
-      <!-- Schedule entries will be added here -->
-    </div>
-    <button type="button" class="btn btn-secondary" onclick="addScheduleEntry()">Add Date/Time Entry</button>
     <button type="submit" class="btn btn-primary w-100">Submit</button>
   </form>
 </div>
 <div th:replace="fragments/footer :: footer"></div>
-<script>
-  function addScheduleEntry() {
-    const scheduleEntriesContainer = document.getElementById('scheduleEntries');
-    const index = scheduleEntriesContainer.children.length;
-    const newEntry = `
-                <div class="mb-3">
-                    <label for="date${index}" class="form-label">Date (YYYY-MM-DD):</label>
-                    <input type="text" id="date${index}" class="form-control" name="scheduleEntries[${index}].date" required/>
-                </div>
-                <div class="mb-3">
-                    <label for="startTime${index}" class="form-label">Start Time (HH:MM):</label>
-                    <input type="text" id="startTime${index}" class="form-control" name="scheduleEntries[${index}].startTime" required/>
-                </div>
-                <div class="mb-3">
-                    <label for="endTime${index}" class="form-label">End Time (HH:MM):</label>
-                    <input type="text" id="endTime${index}" class="form-control" name="scheduleEntries[${index}].endTime" required/>
-                </div>
-            `;
-    scheduleEntriesContainer.insertAdjacentHTML('beforeend', newEntry);
-  }
-</script>
 </body>
 </html>

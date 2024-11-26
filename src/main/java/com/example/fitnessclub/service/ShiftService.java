@@ -18,4 +18,5 @@ public interface ShiftService {
     List<Shift> findShiftsByTrainerId(Long trainerId);
     List<Shift> findClassDateByTrainerId(Long id);
     Shift updateShift(ClassDate classDate);
+    List<ClassDate> findAvailableShifts(Long classId);
 }

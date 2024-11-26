@@ -6,6 +6,8 @@ import com.example.fitnessclub.exceptions.TrainerNotFound;
 import com.example.fitnessclub.model.ClassDate;
 import com.example.fitnessclub.model.ClassDetails;
 import com.example.fitnessclub.model.Shift;
+import com.example.fitnessclub.repository.ClassDateRepository;
+import com.example.fitnessclub.repository.ClassRepository;
 import com.example.fitnessclub.repository.ShiftRepository;
 import org.springframework.stereotype.Service;
 
@@ -16,13 +18,17 @@ public class ShiftServiceImpl implements ShiftService {
     private final ShiftRepository shiftRepository;
     private final UserService userService;
     private final ClassService classService;
+    private final ClassRepository classRepository;
+    private final ClassDateRepository classDateRepository;
 
     public ShiftServiceImpl(ShiftRepository shiftRepository,
                             ClassServiceImpl classServiceImpl,
-                            UserServiceImpl userService) {
+                            UserServiceImpl userService, ClassRepository classRepository, ClassDateRepository classDateRepository) {
         this.shiftRepository = shiftRepository;
         this.userService = userService;
         this.classService = classServiceImpl;
+        this.classRepository = classRepository;
+        this.classDateRepository = classDateRepository;
     }
 
     @Override
@@ -76,6 +82,11 @@ public class ShiftServiceImpl implements ShiftService {
         Shift shift = shiftRepository.findShiftByClassDate(classDate);
         shift.setAttendance(true);
         return shiftRepository.save(shift);
+    }
+
+    @Override
+    public List<ClassDate> findAvailableShifts(Long classId) {
+        return classDateRepository.findAvailableShfifts(classId);
     }
 
     // TODO fix this!

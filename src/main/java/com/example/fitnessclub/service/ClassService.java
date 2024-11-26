@@ -21,4 +21,5 @@ public interface ClassService {
     ClassDate findClassDateById(Long id);
     ClassDetails findClassDetailsByDateId(Long id);
     void createClassDate(ClassDateRequest classDate, Long id);
+
 }

@@ -27,7 +27,7 @@
     <td th:text="${user.lastName}" class="text-left"></td>
     <td th:text="${user.email}" class="text-left"></td>
     <td>
-      <form th:action="@{/admin/user/update/{id}(id=${user.id})}" method="post">
+      <form th:action="@{/admin/user/update/{id}(id=${user.id})}" method="get">
         <button type="submit" class="btn btn-primary mb-3">Update</button>
       </form>
     </td>

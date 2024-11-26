@@ -14,8 +14,8 @@
 <body>
 <div th:replace="fragments/navbar :: navbar"></div>
 <main class="container mt-5">
-    <form th:action="@{/admin/user/update/{id}(id=${id})}" method="post">
-    <div class="form-group mb-3">
+    <form th:action="@{/admin/user/update/{id}(id=${id})}" th:method="post">
+        <div class="form-group mb-3">
         <label for="firstName" class="control-label">First Name:</label>
         <input type="text" id="firstName" name="firstName" class="form-control" th:field="${user.firstName}">
     </div>

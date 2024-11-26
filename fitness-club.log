@@ -96,3 +96,10 @@
 1731507310236:del;ete-database
 1731507315110:delete-database
 1731507318715:seed-data
+1732554303379:list-admins
+1732582648252:seed-data
+1732582653162:list-admins
+1732582664368:ad
+1732582668395:help
+1732582697741:register-admin -
+1732582759217:register-admin -f Chris -l Hughes -e all@all.com -p secret -u -t

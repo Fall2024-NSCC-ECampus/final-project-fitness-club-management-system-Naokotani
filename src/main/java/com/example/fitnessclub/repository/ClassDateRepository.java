@@ -15,4 +15,7 @@ public interface ClassDateRepository extends JpaRepository<ClassDate, Long> {
 
     @Query("FROM ClassDate date ORDER BY date.date, date.startTime")
     List<ClassDate> findClassDetailsByDateDesc();
+
+    @Query("FROM ClassDate d LEFT JOIN Shift s ON d.id=s.classDate.id WHERE s.classDate.id IS NULL AND d.classDetails.id = ?1")
+    List<ClassDate> findAvailableShfifts(Long classId);
 }

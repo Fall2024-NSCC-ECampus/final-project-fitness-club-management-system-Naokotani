@@ -28,7 +28,7 @@
       <td th:text="${date.getStartTime()}" class="text-left"></td>
       <td th:text="${date.getEndTime()}" class="text-left"></td>
       <td>
-          <form th:action="@{/admin/shift/create/(trainerId=${id}, classId=${date.getClassDetails().id}, dateId=${date.id})}" method="post">
+          <form th:action="@{/admin/shift/create(trainerId=${trainerId}, classId=${date.getClassDetails().id}, dateId=${date.id})}" method="post">
           <button type="submit" class="btn btn-primary mb-3">Create Shift</button>
         </form>
       </td>

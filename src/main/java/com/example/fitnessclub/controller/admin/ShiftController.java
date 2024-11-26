@@ -16,11 +16,9 @@ import java.util.List;
 @Controller
 public class ShiftController {
     private final ShiftService shiftService;
-    private final ClassService classService;
 
-    public ShiftController(ShiftService shiftService, ClassService classService) {
+    public ShiftController(ShiftService shiftService) {
         this.shiftService = shiftService;
-        this.classService = classService;
     }
 
     /*
@@ -31,12 +29,12 @@ public class ShiftController {
      * Creates a new shift
      * @return welcome.html or shiftForm.html on error.
      */
-    @PostMapping("shift/create/")
+    @PostMapping("shift/create")
     public String createShift(@RequestParam("trainerId") Long trainerId,
                               @RequestParam("classId") Long classId,
                               @RequestParam("dateId") Long dateId) {
         shiftService.createShift(trainerId, classId, dateId);
-        return "redirect:/admin/dashboard/";
+        return "redirect:/";
     }
 
     /**
@@ -44,10 +42,10 @@ public class ShiftController {
      * @param model The view model.
      * @return shiftForm.html.
      */
-    @PostMapping("shift/form/{id}")
-    public String createShiftForm(@PathVariable Long id, @RequestParam Long classId, Model model) {
-        model.addAttribute("dates", classService.findClassDatesById(classId));
-        model.addAttribute("trainer", id);
+    @GetMapping("shift/form")
+    public String createShiftForm(@RequestParam Long classId, @RequestParam Long trainerId, Model model) {
+        model.addAttribute("dates", shiftService.findAvailableShifts(classId));
+        model.addAttribute("trainerId", trainerId);
         return "admin/shift/shiftForm";
     }
 
@@ -90,6 +88,6 @@ public class ShiftController {
     @PostMapping("shift/delete/{id}")
     public String deleteShift(@PathVariable Long id) {
         shiftService.deleteShift(id);
-        return "redirect:/admin/shifts";
+        return "redirect:/";
     }
 }

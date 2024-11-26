@@ -59,7 +59,7 @@ public class ClassController {
                     e.getMessage());
             return "admin/class/classForm";
         }
-        return "redirect:classes";
+        return "redirect:/admin/classes";
     }
 
     /**

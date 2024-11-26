@@ -33,7 +33,7 @@
       <td th:text="${user.email}" class="text-left"></td>
       <td>
         <div class="d-flex gap-2">
-          <form th:action="@{/admin/shift/form/{id}(id=${user.id})}" method="post">
+          <form th:action="@{/admin/shift/form}" method="get">
             <div class="d-flex gap-2">
               <label for="class"></label><select id="class" name="classId" class="form-select" required>
                 <option value="" disabled selected>Select a class</option>
@@ -41,6 +41,7 @@
                   <option th:value="${class.id}" th:text="${class.name}"></option>
                 </th:block>
               </select>
+              <input type="hidden" name="trainerId" th:value="${user.getId()}" />
               <button type="submit" class="btn btn-success">Add Shift</button>
             </div>
           </form>
