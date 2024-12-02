@@ -28,10 +28,14 @@ class DatabaseInsertTest {
     @Autowired
     private UserRepository userRepository;
 
-    //TODO refactor and split this isn't function.
     @Test
     @Transactional
     public void insert(){
+        insertUsers();
+        insertClasses();
+    }
+
+    private void insertUsers() {
         User admin = new User("Admin", "User","admin@fitnessclub.com", "admin123");
         User trainer = new User( "John", "Doe","trainer@fitnessclub.com", "trainer123");
         User member = new User( "Jane", "Smith","member@fitnessclub.com", "member123");
@@ -62,7 +66,9 @@ class DatabaseInsertTest {
         userRepository.save(member5);
         userRepository.save(all);
         userRepository.save(trainer);
+    }
 
+    private void insertClasses() {
         ClassDetails yogaClass = new ClassDetails("Yoga");
         ClassDetails pilatesClass = new ClassDetails("Pilates");
         ClassDetails spinClass = new ClassDetails("Spin");
@@ -110,4 +116,6 @@ class DatabaseInsertTest {
         shiftRepository.save(shift2);
         shiftRepository.save(shift3);
     }
+
+
 }

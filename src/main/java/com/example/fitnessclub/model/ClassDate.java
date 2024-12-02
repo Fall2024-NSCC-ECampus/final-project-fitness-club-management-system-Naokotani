@@ -15,16 +15,12 @@ public class ClassDate {
     @Id
     @GeneratedValue
     private Long id;
-
     @ManyToOne
     private ClassDetails classDetails;
-
     @NotNull
     private LocalDate date;
-
     @NotNull
     private LocalTime startTime;
-
     @NotNull
     private LocalTime endTime;
 
@@ -35,4 +31,6 @@ public class ClassDate {
         this.startTime = startTime;
         this.endTime = endTime;
     }
+
+
 }

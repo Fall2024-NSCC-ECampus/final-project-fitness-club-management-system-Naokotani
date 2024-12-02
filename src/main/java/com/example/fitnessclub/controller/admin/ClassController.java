@@ -81,12 +81,12 @@ public class ClassController {
      */
     @GetMapping("class/date/create/{id}")
     public String createClassDateForm(@PathVariable Long id, Model model) {
+        model.addAttribute("start", false);
         model.addAttribute("classDateRequest", new ClassDateRequest());
         model.addAttribute("class", classService.findClassDetailsById(id));
         return "admin/class/classDateForm";
     }
 
-    //TODO validation
     /**
      * Creates a new class date
      * @param classDate Class rate from request
@@ -95,7 +95,16 @@ public class ClassController {
      * @return classes.html
      */
     @PostMapping("class/date/create/{id}")
-    public String createClassDate(@Valid ClassDateRequest classDate, @PathVariable Long id, Model model) {
+    public String createClassDate(@Valid ClassDateRequest classDate,
+                                  BindingResult bindingResult,
+                                  @PathVariable Long id, Model model) {
+        if(bindingResult.hasErrors()) {
+            model.addAttribute("start", true);
+            model.addAttribute("classDateRequest", classDate);
+            model.addAttribute("class", classService.findClassDetailsById(id));
+            return "admin/class/classDateForm";
+        }
+
         classService.createClassDate(classDate, id);
         return "redirect:/admin/classes";
     }
