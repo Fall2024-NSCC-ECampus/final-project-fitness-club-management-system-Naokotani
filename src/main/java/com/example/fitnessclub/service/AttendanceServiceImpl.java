@@ -19,14 +19,16 @@ public class AttendanceServiceImpl implements AttendanceService {
     private final AttendanceRepository attendanceRepository;
     private final UserService userService;
     private final ClassService classService;
-    private final ShiftService shiftService;
+    private final ShiftRepository shiftRepository;
 
 
-    public AttendanceServiceImpl(AttendanceRepository attendanceRepository, UserService userService, ClassService classService, ShiftRepository shiftRepository, ShiftService shiftService) {
+    public AttendanceServiceImpl(AttendanceRepository attendanceRepository, UserService userService,
+                                 ClassService classService, ShiftRepository shiftRepository,
+                                 ShiftRepository shiftRepository1) {
         this.attendanceRepository = attendanceRepository;
         this.classService = classService;
         this.userService = userService;
-        this.shiftService = shiftService;
+             this.shiftRepository = shiftRepository1;
     }
 
     /**
@@ -39,8 +41,12 @@ public class AttendanceServiceImpl implements AttendanceService {
     public Attendance createAttendance(List<Long> memberIds, Long classDateId) {
         Set<User> members = memberIds.stream().map(userService::findUserById).collect(Collectors.toSet());
         ClassDate classDate = classService.findClassDateById(classDateId);
-        if(classDate == null) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        Attendance attendance = attendanceRepository.save(new Attendance(classDate, members));
+                if(classDate == null) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        Attendance attendance = new Attendance();
+        attendanceRepository.save(new Attendance(classDate, members));
+        Shift shift = shiftRepository.findShiftByClassDate(classDate);
+        shift.setAttendance(true);
+        shiftRepository.save(shift);
         return attendanceRepository.save(attendance);
     }
 }

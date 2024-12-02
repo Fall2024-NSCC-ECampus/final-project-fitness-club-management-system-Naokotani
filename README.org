@@ -1,0 +1,46 @@
+#+title: Fitness Club Website
+
+* Usage
+To run the application first start the PostgreSQL docker by running =docker compose up= in the root directory.
+next run the application (in intellij fun the =FitnessClubApplication= class). The application with listen on localhsot:8080 by default. Most of the functionlity should be pretty self explainatory, but here are some usage examples.
+
+** Log in
+Click login and put in your information
+[[file:images/login.png]]
+
+** Create new user
+On the admin dashboard you can create a new user by clicking "Register User" and imputing the information
+[[file:images/new_user.png]]
+
+** List users
+The "List Users" button will list all users.
+[[file:images/list_users.png]]
+
+** Update a user
+If you click the update user button in the user list you can change a users information
+[[file:images/update_user.png]]
+
+** Back to Dashboard and Sign out
+You can click the "Dashboard" button in the upper right to go back to the dashboard
+[[file:images/dashboard.png]]
+
+or you can sign out entirely by clicking the sign out button in the top right
+[[file:images/sign_out.png]]
+
+** Trainer dashboard
+If you sign in as a trainer you will get the trainer dashboard.
+
+
+** Member dashboard
+If you sign in as a member you will ge the memeber dashboard.
+
+** Note on Admin account
+Much of the functionality requires an Admin role, but an admin role is not created by default. The ability to create admins acount is provided when launching the application in a shell privided from the standard out of the process here:
+
+[[file:images/admin_shell.png]]
+
+Typing =help= will provide a list of available commands to run like so:
+
+[[file:images/shell_help.png]]
+
+Invoking =seed-data= will genearte some random data to be used for testing. The seed-data includes an admin role and "all" role user that is a member, admin and trainer. Alternatively, you can create a new admin without seeding data by invoking =register-admin=. =help register-admin= will provide the documentation for the inputs requires to create an admin.
