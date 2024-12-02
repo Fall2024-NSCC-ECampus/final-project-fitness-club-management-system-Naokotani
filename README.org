@@ -29,10 +29,11 @@ or you can sign out entirely by clicking the sign out button in the top right
 
 ** Trainer dashboard
 If you sign in as a trainer you will get the trainer dashboard.
-
+[[file:images/trainer_dash.png]]
 
 ** Member dashboard
 If you sign in as a member you will ge the memeber dashboard.
+[[file:images/member_dash.png]]
 
 ** Note on Admin account
 Much of the functionality requires an Admin role, but an admin role is not created by default. The ability to create admins acount is provided when launching the application in a shell privided from the standard out of the process here:
